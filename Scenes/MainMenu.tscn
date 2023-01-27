@@ -53,7 +53,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Title"
+text = "MACROCYST"
 label_settings = SubResource("LabelSettings_fbvua")
 horizontal_alignment = 1
 vertical_alignment = 1

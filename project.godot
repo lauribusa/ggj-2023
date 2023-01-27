@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Base Game"
+config/name="Macrocyst"
 config/description="A base game with basic settings to be used as a lightweight template. Includes user settings and simple localization."
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.0", "C#")
