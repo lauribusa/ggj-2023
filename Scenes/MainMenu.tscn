@@ -116,6 +116,8 @@ script = ExtResource("5_5gcp7")
 
 [node name="SettingsWindow" parent="." instance=ExtResource("6_pvdu3")]
 
+[node name="Node2D" type="Node2D" parent="."]
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/PlayContainer/Play" to="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/PlayContainer/Play" method="ToGameScene"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/SettingsContainer/Settings" to="DialogController" method="OpenSettings"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/CreditsContainer/Credits" to="MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/CreditsContainer/Credits" method="ToCreditsScene"]
