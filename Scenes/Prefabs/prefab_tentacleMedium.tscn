@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" uid="uid://nnju0vcbckge" path="res://Assets/Meshes/mesh_tentacleMedium.glb" id="1_tq87f"]
+[ext_resource type="Script" path="res://Scripts/Game/Tentacle.cs" id="2_ng4d1"]
+[ext_resource type="Material" path="res://Assets/Materials/mat_tentacle.tres" id="3_73wyp"]
+
+[node name="Tentacle_Medium" instance=ExtResource("1_tq87f")]
+script = ExtResource("2_ng4d1")
+
+[node name="rig_tentacleMedium" parent="." index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="rig_tentacleMedium" index="0"]
+bones/0/position = Vector3(-0.457697, -5.12553, -0.348211)
+bones/0/rotation = Quaternion(0.0260452, 0.894415, 0.0525405, -0.443377)
+bones/1/rotation = Quaternion(-5.11296e-07, -4.83377e-06, -5.69059e-07, 1)
+bones/2/rotation = Quaternion(2.54032e-07, 2.34411e-06, 2.73323e-07, 1)
+bones/2/scale = Vector3(0.915431, 1, 0.915431)
+bones/3/rotation = Quaternion(4.09138e-09, 1.42036e-07, 2.28367e-08, 1)
+bones/3/scale = Vector3(0.88957, 1, 0.88957)
+bones/4/rotation = Quaternion(-7.75419e-09, 1.09041e-10, -2.9398e-09, 1)
+bones/4/scale = Vector3(0.851847, 1, 0.851847)
+bones/5/rotation = Quaternion(-2.56708e-07, -2.42409e-06, -3.00251e-07, 1)
+bones/5/scale = Vector3(1.11275, 1, 1.11275)
+bones/6/rotation = Quaternion(2.58002e-07, 2.35916e-06, 2.86942e-07, 1)
+bones/6/scale = Vector3(0.710585, 1, 0.710585)
+bones/7/rotation = Quaternion(-0.0454335, -0.012166, -0.00254778, 0.99889)
+bones/7/scale = Vector3(0.386738, 1.00686, 0.385938)
+
+[node name="tentacleMedium" parent="rig_tentacleMedium/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("3_73wyp")
