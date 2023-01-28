@@ -1,33 +1,55 @@
 using Godot;
 using Godot.Collections;
-using System;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace Game;
+
 [Tool]
 public partial class GameNode : Area2D
 {
-    // Called when the node enters the scene tree for the first time.
+    [Signal]
+    public delegate void FactionChangedEventHandler(Faction faction);
+
     [Export]
     public Array<NodePath> closeNeighborsNodes;
+
     [Export]
     public Array<NodePath> farNeighborsNodes;
+
+    private Faction _currentFaction;
+
     [Export]
-    public Faction currentFaction;
+    public Faction CurrentFaction
+    {
+        get => _currentFaction;
+        set
+        {
+            _currentFaction = value;
+            SetCellFaction();
+        }
+    }
+
     [Export]
     public int currentPowerValue;
+
     [Export]
     public int chargeRate;
+
     [Export]
     public Label powerValueLabel;
+
+    [Export]
+    private Cell _cell;
+
     public bool isHovered;
+
     [Export]
     public bool isMainNode;
+
     private double elapsedTime;
 
     public override void _Ready()
     {
+        SetCellFaction();
         if (Engine.IsEditorHint()) return;
         GameManager gameManager = GetNode("/root/GameManager") as GameManager;
         gameManager.AddToNodeList(GetPath());
@@ -50,31 +72,36 @@ public partial class GameNode : Area2D
             }
         }
     }
+
     public override void _Process(double delta)
     {
-        if (Engine.IsEditorHint()) {
+        if (Engine.IsEditorHint())
+        {
             QueueRedraw();
-        
-        } else
+
+        }
+        else
         {
             elapsedTime += delta;
-            if(elapsedTime >= 1 && currentPowerValue < GameManager.Instance.maxValueOnNodes)
+            if (elapsedTime >= 1 && currentPowerValue < GameManager.Instance.maxValueOnNodes)
             {
                 elapsedTime = 0;
                 GeneratePowerValue();
             }
         }
     }
+
     private void UpdateValueText(int value)
     {
         powerValueLabel.Text = value.ToString();
     }
+
     private void DrawConnection(GameNode toNode)
     {
         if (toNode is null) return;
         DrawDashedLine(GlobalPosition, toNode.GlobalPosition, Color.Color8(255, 255, 255));
     }
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+
     public override void _Input(InputEvent @event)
     {
         if (Engine.IsEditorHint()) return;
@@ -122,5 +149,25 @@ public partial class GameNode : Area2D
     {
         if (Engine.IsEditorHint()) return;
         isHovered = false;
+    }
+
+    private void SetCellFaction()
+    {
+        if (_cell == null) return;
+
+        switch (_currentFaction)
+        {
+            case Faction.Neutral:
+                _cell.SetNeutral();
+                break;
+
+            case Faction.Parasite:
+                _cell.SetCorrupt();
+                break;
+
+            case Faction.ImmuneSystem:
+                _cell.SetImmune();
+                break;
+        }
     }
 }
