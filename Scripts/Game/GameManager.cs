@@ -22,12 +22,11 @@ public partial class GameManager : Node2D
 
     [Signal] public delegate void NodeSelectedEventHandler(GameNode nodeFrom, GameNode nodeTo);
 	[Signal] public delegate void NodeUnselectedEventHandler(GameNode node, bool isOrigin);
-	[Signal] public delegate void NodeCapturedEventHandler(GameNode node, Faction newFaction);
 	[Signal] public delegate void GameEndEventHandler(bool playerWins);
 
     public static GameManager Instance { get => _instance; }
 
-	public Array<GameNode> gameNodes = new Array<GameNode>();
+	public Array<GameNode> gameNodes;
 	public GameNode playerBase;
 	public GameNode enemyBase;
 	[Export]
@@ -45,40 +44,29 @@ public partial class GameManager : Node2D
     {
 		if (nodeFrom.currentPowerValue >= nodeTo.currentPowerValue)
 		{
-			nodeTo.currentFaction = nodeFrom.currentFaction;
+			nodeTo.CurrentFaction = nodeFrom.CurrentFaction;
 			nodeTo.currentPowerValue += Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 			nodeFrom.currentPowerValue -= Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 		}
-		GD.Print(nodeFrom.Name, nodeFrom.currentFaction);
-		GD.Print(nodeTo.Name, nodeFrom.currentFaction);
-		for (int i = 0; i < gameNodes.Count; i++)
-		{
-			if (gameNodes[i].isMainNode && gameNodes[i].currentFaction == Faction.Parasite)
-			{
-				playerBase = gameNodes[i];
-			}
-            if (gameNodes[i].isMainNode && gameNodes[i].currentFaction == Faction.ImmuneSystem)
-            {
-                playerBase = gameNodes[i];
-            }
-        }
+		GD.Print(nodeFrom.Name, nodeFrom.CurrentFaction);
+		GD.Print(nodeTo.Name, nodeFrom.CurrentFaction);
     }
     public override void _Process(double delta)
 	{
 		QueueRedraw();
 		if (playerBase is null || enemyBase is null) return;
-		if(playerBase.currentFaction != Faction.Parasite)
+		if(playerBase.CurrentFaction != Faction.Parasite)
 		{
 			EmitSignal("GameEnd", false);
 		}
-		if(enemyBase.currentFaction != Faction.ImmuneSystem) 
+		if(enemyBase.CurrentFaction != Faction.ImmuneSystem) 
 		{
 			EmitSignal("GameEnd", true);
 		}
 		if(HasOriginSelected() && HasDestinationSelected())
 		{
 			playerOriginNode.DecreasePower();
-			if(playerDestinationNode.currentFaction == Faction.Parasite)
+			if(playerDestinationNode.CurrentFaction == Faction.Parasite)
 			{
 				if (playerDestinationNode.currentPowerValue >= maxValueOnNodes) playerDestinationNode.SetPower(maxValueOnNodes);
 				playerDestinationNode.IncreasePower();
@@ -109,7 +97,6 @@ public partial class GameManager : Node2D
 		playerOriginNode = node;
 		node.sprite.SelfModulate = Color.Color8(255, 0, 0);
 		GD.Print("Added origin: "+node.Name);
-		EmitSignal("NodeSelected", playerO)
 	}
 
 	public void SelectDestinationNode(GameNode node)
@@ -132,7 +119,7 @@ public partial class GameManager : Node2D
 		node.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		if(isOrigin)
 		{
-			if (playerDestinationNode.currentFaction == Faction.Parasite)
+			if (playerDestinationNode.CurrentFaction == Faction.Parasite)
 			{
 				var _newNode = playerDestinationNode;
 				CleanSelectedNodes();

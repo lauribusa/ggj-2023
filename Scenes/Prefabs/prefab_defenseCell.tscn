@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dku5nblfq1s6a"]
+[gd_scene load_steps=4 format=3 uid="uid://cxeug5fvb0a5l"]
 
-[ext_resource type="PackedScene" uid="uid://dh8dd25wrm1y8" path="res://Scenes/Prefabs/prefab_cell.tscn" id="1_vrlut"]
+[ext_resource type="PackedScene" uid="uid://dh8dd25wrm1y8" path="res://Scenes/Prefabs/prefab_neutralcell.tscn" id="1_vrlut"]
 [ext_resource type="Material" uid="uid://dj3k0edbj7wo4" path="res://Assets/Materials/mat_defenseCell.tres" id="2_cp2b5"]
 [ext_resource type="Material" uid="uid://b4157qrd54665" path="res://Assets/Materials/mat_defenseCellTransparent.tres" id="2_jcleo"]
 
-[node name="Cell" instance=ExtResource("1_vrlut")]
+[node name="DefenseCell" instance=ExtResource("1_vrlut")]
 
 [node name="Skeleton3D" parent="rig_cell" index="0"]
 bones/0/scale = Vector3(1, 1, 1)
