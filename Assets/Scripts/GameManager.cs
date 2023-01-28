@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent<GameNodeUI, GameNodeUI> linkCreatedEvent;
     public UnityEvent<GameNodeUI, GameNodeUI> linkDestroyedEvent;
 
+    public UnityEvent<GameNodeUI, Faction> factionChangedEvent;
+
     public GameNodeUI playerSelectedOrigin;
     public GameNodeUI playerSelectedDestination;
 
@@ -32,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     public int globalDrainRate;
     public int globalChargeRate;
-    public int globalMaxCharge;
+    public int globalMaxCharge = 60;
 
     [Tooltip("Passive charge interval in seconds")]
     public float passiveChargeInterval;

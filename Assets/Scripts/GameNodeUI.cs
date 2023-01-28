@@ -36,6 +36,8 @@ public class GameNodeUI : MonoBehaviour
     [Header("Node values")]
     public int chargeRate;
     public bool isFactionMainNode;
+    [HideInInspector]
+    public bool isLinked;
     #endregion
 
 
@@ -47,7 +49,7 @@ public class GameNodeUI : MonoBehaviour
     [SerializeField]
     private int nodeValue;
 
-    private bool isLinked;
+    
 
 	#endregion
 
