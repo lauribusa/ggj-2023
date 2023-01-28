@@ -1,15 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq4qyg20sb13h"]
+[gd_scene load_steps=7 format=3 uid="uid://dq4qyg20sb13h"]
 
 [ext_resource type="PackedScene" uid="uid://dh8dd25wrm1y8" path="res://Scenes/Prefabs/prefab_neutralcell.tscn" id="1_afwhh"]
 [ext_resource type="Script" path="res://Scenes/Prefabs/Cell.cs" id="1_y6voe"]
+[ext_resource type="PackedScene" uid="uid://w8ycoony5htd" path="res://Scenes/Prefabs/prefab_tentacleLong.tscn" id="2_66url"]
 [ext_resource type="PackedScene" uid="uid://cxeug5fvb0a5l" path="res://Scenes/Prefabs/prefab_defenseCell.tscn" id="2_mfjdx"]
 [ext_resource type="PackedScene" uid="uid://d30dc1bq5f4y5" path="res://Scenes/Prefabs/prefab_corruptCell.tscn" id="3_3s3f6"]
+[ext_resource type="Script" path="res://Scripts/Game/TentacleSpawner.cs" id="5_2l01t"]
 
 [node name="Cell" type="Node3D" node_paths=PackedStringArray("_neutralCell", "_defenseCell", "_corruptCell")]
 script = ExtResource("1_y6voe")
 _neutralCell = NodePath("NeutralCell")
 _defenseCell = NodePath("DefenseCell")
 _corruptCell = NodePath("CorruptCell")
+_tentacleLongPrefab = ExtResource("2_66url")
 
 [node name="NeutralCell" parent="." instance=ExtResource("1_afwhh")]
 
@@ -18,3 +21,6 @@ visible = false
 
 [node name="CorruptCell" parent="." instance=ExtResource("3_3s3f6")]
 visible = false
+
+[node name="TentacleSpawner" type="Node" parent="."]
+script = ExtResource("5_2l01t")

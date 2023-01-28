@@ -27,7 +27,7 @@ public partial class TentacleSpawner : Node
 
     private void OnGameManagerNodeSelected(GameNode nodeFrom, GameNode nodeTo)
     {
-        
+        if (nodeFrom != _cell.GameNode) return;
     }
 
     #endregion

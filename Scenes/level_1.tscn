@@ -52,75 +52,87 @@ size = 25.0
 mesh = SubResource("PlaneMesh_qwt3c")
 skeleton = NodePath("../../..")
 
-[node name="Cell" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3654, 0, 0)
+GameNode = NodePath("../../../GameNode")
 
-[node name="Cell2" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell2" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9735, 0, 0)
+GameNode = NodePath("../../../GameNode2")
 
-[node name="Cell3" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell3" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0194731, 0, -4.00244)
+GameNode = NodePath("../../../GameNode3")
 
-[node name="Cell4" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell4" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0194731, 0, 3.96539)
+GameNode = NodePath("../../../GameNode4")
 
-[node name="Cell5" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell5" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.53, 0, -0.0749512)
+GameNode = NodePath("../../../GameNode5")
 
-[node name="Cell6" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+[node name="Cell6" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("GameNode") instance=ExtResource("1_ebmlf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2994, 0, -0.0749512)
-
-[node name="Tentacle_Long" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
-transform = Transform3D(0.511353, 0, -0.859371, 0, 1, 0, 0.859371, 0, 0.511353, -6.9043, 0, 0)
-
-[node name="Tentacle_Long5" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
-transform = Transform3D(0.0131595, 0, -0.999913, 0, 1, 0, 0.999913, 0, 0.0131595, -15.1096, 0, 0)
+GameNode = NodePath("../../../GameNode6")
 
 [node name="Tentacle_Long6" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.0131595, 0, -0.999913, 0, 1, 0, 0.999913, 0, 0.0131595, 6.92216, 0, 0)
+visible = false
 
-[node name="Tentacle_Long2" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
+transform = Transform3D(0.0131595, 0, -0.999913, 0, 1, 0, 0.999913, 0, 0.0131595, -15.1096, 0, 0)
+visible = false
+
+[node name="Tentacle_Long2A" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
+transform = Transform3D(0.511353, 0, -0.859371, 0, 1, 0, 0.859371, 0, 0.511353, -6.9043, 0, 0)
+visible = false
+
+[node name="Tentacle_Long2B" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(-0.553842, 0, -0.832622, 0, 1, 0, 0.832622, 0, -0.553842, -6.9043, 0, 0)
+visible = false
 
 [node name="Tentacle_Long3" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(-0.48856, 0, -0.87253, 0, 1, 0, 0.87253, 0, -0.48856, -0.0117741, 0, -3.91867)
+visible = false
 
 [node name="Tentacle_Long4" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.515871, -0.0341216, -0.855986, 0.00288794, 0.99927, -0.0380928, 0.856661, 0.0171789, 0.515593, 0.157942, 0, 4)
+visible = false
 
-[node name="GameNode" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(295, 464)
 farNeighborsNodes = [NodePath("../GameNode2")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell")
 
-[node name="GameNode2" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode2" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(655, 464)
 farNeighborsNodes = [NodePath("../GameNode"), NodePath("../GameNode3"), NodePath("../GameNode4")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell2")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell2")
 CurrentFaction = 2
 
-[node name="GameNode3" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode3" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(960, 292)
 farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell3")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell3")
 CurrentFaction = 2
 
-[node name="GameNode4" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode4" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(960, 635)
 farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell4")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell4")
 CurrentFaction = 2
 
-[node name="GameNode5" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode5" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(1242, 465)
 farNeighborsNodes = [NodePath("../GameNode3"), NodePath("../GameNode4"), NodePath("../GameNode6")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell5")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell5")
 CurrentFaction = 2
 
-[node name="GameNode6" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+[node name="GameNode6" parent="." node_paths=PackedStringArray("Cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(1623, 465)
 farNeighborsNodes = [NodePath("../GameNode5")]
-_cell = NodePath("../SubViewportContainer/SubViewport/Cell6")
+Cell = NodePath("../SubViewportContainer/SubViewport/Cell6")
 CurrentFaction = 1
 
 [node name="Pause" parent="." instance=ExtResource("4_dw5n8")]

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace Game;
 
@@ -6,6 +7,7 @@ public partial class Cell : Node3D
 {
     #region Exposed
 
+    [Export]
     public GameNode GameNode {get; set;}
 
     [Export]
@@ -17,14 +19,27 @@ public partial class Cell : Node3D
     [Export]
     private Node3D _corruptCell;
 
+    [Export]
+    private PackedScene _tentacleLongPrefab;
+
     #endregion
 
 
     #region Godot API
 
     public override void _Ready()
-    {
-        GameManager.Instance.NodeSelected += OnGameManagerNodeSelected;
+    {     
+        Array<NodePath> neighbourPath = GameNode.farNeighborsNodes;
+        for (int i = 0; i < neighbourPath.Count; i++)
+        {
+            var gameNode = GameNode.GetNode<GameNode>(neighbourPath[i]);
+            var tentacle = _tentacleLongPrefab.Instantiate<Tentacle>();
+            tentacle.Target = gameNode;
+
+            AddChild(tentacle);
+            tentacle.Position = Position;
+            tentacle.LookAt(gameNode.Cell.Position);
+        }
     }
 
     #endregion
@@ -51,11 +66,6 @@ public partial class Cell : Node3D
         _neutralCell.Visible = false;
         _defenseCell.Visible = true;
         _corruptCell.Visible = false;
-    }
-
-    private void OnGameManagerNodeSelected(GameNode nodeFrom, GameNode nodeTo)
-    {
-        
     }
 
     #endregion
