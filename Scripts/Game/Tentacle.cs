@@ -50,6 +50,7 @@ public partial class Tentacle : Node3D
 
     private void OnGameManagerNodeSelected(GameNode nodeFrom, GameNode nodeTo)
     {
+        GD.Print(Name + "called");
         if (nodeFrom != _cell.GameNode) return;
         if (_cell.GameNode.CurrentFaction != Faction.Parasite) return;
         if (Target != nodeTo) return;

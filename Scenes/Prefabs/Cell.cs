@@ -37,7 +37,6 @@ public partial class Cell : Node3D
             tentacle.Target = gameNode;
 
             AddChild(tentacle);
-            tentacle.Position = Position;
             tentacle.LookAt(gameNode.Cell.Position);
         }
     }
