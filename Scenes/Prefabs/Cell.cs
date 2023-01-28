@@ -6,6 +6,8 @@ public partial class Cell : Node3D
 {
     #region Exposed
 
+    public GameNode GameNode {get; set;}
+
     [Export]
     private Node3D _neutralCell;
 
@@ -14,6 +16,16 @@ public partial class Cell : Node3D
 
     [Export]
     private Node3D _corruptCell;
+
+    #endregion
+
+
+    #region Godot API
+
+    public override void _Ready()
+    {
+        GameManager.Instance.NodeSelected += OnGameManagerNodeSelected;
+    }
 
     #endregion
 
@@ -39,6 +51,11 @@ public partial class Cell : Node3D
         _neutralCell.Visible = false;
         _defenseCell.Visible = true;
         _corruptCell.Visible = false;
+    }
+
+    private void OnGameManagerNodeSelected(GameNode nodeFrom, GameNode nodeTo)
+    {
+        
     }
 
     #endregion
