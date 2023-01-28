@@ -42,22 +42,22 @@ public partial class GameManager : Node2D
     {
 		if (nodeFrom.currentPowerValue >= nodeTo.currentPowerValue)
 		{
-			nodeTo.CurrentFaction = nodeFrom.CurrentFaction;
+			nodeTo.currentFaction = nodeFrom.currentFaction;
 			nodeTo.currentPowerValue = Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 			nodeFrom.currentPowerValue -= Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 		}
-		GD.Print(nodeFrom.Name, nodeFrom.CurrentFaction);
-		GD.Print(nodeTo.Name, nodeFrom.CurrentFaction);
+		GD.Print(nodeFrom.Name, nodeFrom.currentFaction);
+		GD.Print(nodeTo.Name, nodeFrom.currentFaction);
     }
     public override void _Process(double delta)
 	{
 		QueueRedraw();
 		if (playerBase is null || enemyBase is null) return;
-		if(playerBase.CurrentFaction != Faction.Parasite)
+		if(playerBase.currentFaction != Faction.Parasite)
 		{
 			EmitSignal("GameEnd", false);
 		}
-		if(enemyBase.CurrentFaction != Faction.ImmuneSystem) 
+		if(enemyBase.currentFaction != Faction.ImmuneSystem) 
 		{
 			EmitSignal("GameEnd", true);
 		}
@@ -100,7 +100,7 @@ public partial class GameManager : Node2D
 		node.SelfModulate = Color.Color8(255, 255, 255);
 		if(isOrigin)
 		{
-			if (node.CurrentFaction == Faction.Parasite) originNode = node;
+			if (node.currentFaction == Faction.Parasite) originNode = node;
 		}
 	}
 
