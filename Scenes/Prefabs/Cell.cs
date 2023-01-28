@@ -2,7 +2,6 @@ using Godot;
 
 namespace Game;
 
-[Tool]
 public partial class Cell : Node3D
 {
     #region Exposed

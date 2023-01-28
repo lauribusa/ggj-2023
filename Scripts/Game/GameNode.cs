@@ -14,8 +14,23 @@ public partial class GameNode : Area2D
     public Array<NodePath> closeNeighborsNodes;
     [Export]
     public Array<NodePath> farNeighborsNodes;
+
+    private Faction _currentFaction;
+
     [Export]
-    public Faction currentFaction;
+    private Cell _cell;
+
+    [Export]
+    public Faction CurrentFaction
+    {
+        get => _currentFaction;
+        set
+        {
+            _currentFaction = value;
+            SetCellFaction();
+        }
+    }
+
     [Export]
     public int currentPowerValue;
     [Export]
@@ -73,7 +88,7 @@ public partial class GameNode : Area2D
         
         } else
         {
-            if (currentFaction == Faction.Neutral) return;
+            if (CurrentFaction == Faction.Neutral) return;
             if (!canChargeUp) return;
             elapsedTime += delta;
             if(elapsedTime >= 1 && currentPowerValue < GameManager.Instance.maxValueOnNodes)
@@ -170,5 +185,25 @@ public partial class GameNode : Area2D
     {
         if (Engine.IsEditorHint()) return;
         isHovered = false;
+    }
+
+    private void SetCellFaction()
+    {
+        if (_cell == null) return;
+
+        switch (_currentFaction)
+        {
+            case Faction.Neutral:
+                _cell.SetNeutral();
+                break;
+
+            case Faction.Parasite:
+                _cell.SetCorrupt();
+                break;
+
+            case Faction.ImmuneSystem:
+                _cell.SetImmune();
+                break;
+        }
     }
 }
