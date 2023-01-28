@@ -1,42 +1,71 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Cell : MonoBehaviour
 {
-    #region Exposed
-    public GameNodeUI gameNode;
-    public bool isSelected;
+	#region Exposed
 
-    #endregion
+	[SerializeField]
+	private GameObject _neutralCell;
 
+    [SerializeField]
+    private GameObject _immuneCell;
 
-    #region Private And Protected
+    [SerializeField]
+    private GameObject _corruptCell;
+
+    [SerializeField]
+    private Tentacle _tentacleMediumPrefab;
+
+    [SerializeField]
+    private Tentacle _tentacleLongPrefab;
 
     #endregion
 
 
     #region Unity API
 
-    private void Start()
+    private void Awake()
     {
-
+        
     }
 
     private void Update()
     {
+        
+    }
+	
+	#endregion
+	
+	
+	#region Utils
+	
+	public void SetNeutral()
+	{
+        _neutralCell.SetActive(true);
+        _immuneCell.SetActive(false);
+        _corruptCell.SetActive(false);
+    }
 
+    public void SetImmune()
+    {
+        _neutralCell.SetActive(false);
+        _immuneCell.SetActive(true);
+        _corruptCell.SetActive(false);
+    }
+
+    public void SetCorrupt()
+    {
+        _neutralCell.SetActive(false);
+        _immuneCell.SetActive(false);
+        _corruptCell.SetActive(true);
     }
 
     #endregion
 
 
-    #region Main
-
-    #endregion
+    #region Private and Protected
 
 
-    #region Singleton
 
     #endregion
 }
-

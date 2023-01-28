@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: 3061848454600209174
     second: long_deploy
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tentacle
+    second: {fileID: 2100000, guid: 348215ca2e4bc94418fad2b2c69d4edd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
