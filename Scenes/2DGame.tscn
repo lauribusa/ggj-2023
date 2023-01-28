@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://beof6qixfwfs0"]
+
+[ext_resource type="Texture2D" uid="uid://g8vofnj84b0l" path="res://icon.png" id="1_ecguw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5146v"]
+
+[node name="2DGame" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(527, 280)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_5146v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+visible = false
+texture = ExtResource("1_ecguw")
+
+[node name="SubViewport" type="SubViewport" parent="Area2D"]
+transparent_bg = true
+size_2d_override_stretch = true
+
+[node name="Node3D" type="Node3D" parent="Area2D/SubViewport"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Area2D/SubViewport/Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="Area2D/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.31)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Area2D/SubViewport/Node3D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]

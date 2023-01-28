@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cejdeoq438mn1"]
+
+[ext_resource type="Script" path="res://Scripts/Game/Camera3DVariable.cs" id="1_mkyvh"]
+
+[resource]
+script = ExtResource("1_mkyvh")
