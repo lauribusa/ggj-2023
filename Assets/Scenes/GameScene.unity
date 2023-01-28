@@ -1042,12 +1042,17 @@ MonoBehaviour:
   linkDestroyedEvent:
     m_PersistentCalls:
       m_Calls: []
+  factionChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   playerSelectedOrigin: {fileID: 0}
   playerSelectedDestination: {fileID: 0}
   existingNodes: []
   globalDrainRate: 1
   globalChargeRate: 1
   globalMaxCharge: 50
+  lowChargeThreshold1: 30
+  highChargeThreshold2: 30
   passiveChargeInterval: 1
 --- !u!4 &2010989827
 Transform:
