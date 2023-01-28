@@ -32,12 +32,14 @@ chargeRate = 1
 
 [node name="GameNode4" parent="." node_paths=PackedStringArray("powerValueLabel") instance=ExtResource("4_5icv5")]
 position = Vector2(261, 473)
+CurrentFaction = 1
 currentPowerValue = 14
 chargeRate = 1
 powerValueLabel = NodePath("../GameNode2/MarginContainer/Label")
 
 [node name="GameNode5" parent="." node_paths=PackedStringArray("powerValueLabel") instance=ExtResource("4_5icv5")]
 position = Vector2(905, 547)
+CurrentFaction = 2
 currentPowerValue = 45
 chargeRate = 1
 powerValueLabel = NodePath("../GameNode2/MarginContainer/Label")
