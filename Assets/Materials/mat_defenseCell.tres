@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dj3k0edbj7wo4"]
-
-[ext_resource type="Texture2D" uid="uid://tusr56c5b04g" path="res://Assets/Textures/cell_albedoAlpha.png" id="1_t0rkp"]
-[ext_resource type="Texture2D" uid="uid://dxwtsgw8xc58y" path="res://Assets/Textures/cell_roughness.png" id="2_ma40d"]
-
-[resource]
-albedo_color = Color(0, 0.964706, 0.992157, 1)
-albedo_texture = ExtResource("1_t0rkp")
-roughness_texture = ExtResource("2_ma40d")
