@@ -14,10 +14,10 @@ public class Cell : MonoBehaviour
     private GameObject _corruptCell;
 
     [SerializeField]
-    private GameObject _tentacleMediumPrefab;
+    private Tentacle _tentacleMediumPrefab;
 
     [SerializeField]
-    private GameObject _tentacleLongPrefab;
+    private Tentacle _tentacleLongPrefab;
 
     #endregion
 

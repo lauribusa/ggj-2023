@@ -11,6 +11,13 @@ public class Tentacle : MonoBehaviour
     #endregion
 
 
+    #region Exposed
+
+    public Transform Transform => _transform ? _transform : _transform = GetComponent<Transform>();
+
+    #endregion
+
+
     #region Unity API
 
     private void Awake() => _animator = GetComponent<Animator>();
@@ -39,6 +46,7 @@ public class Tentacle : MonoBehaviour
 
     private const string CAN_DEPLOY = "CanDeploy";
     private Animator _animator;
+    private Transform _transform;
 
     #endregion
 }
