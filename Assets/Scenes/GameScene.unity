@@ -1045,9 +1045,10 @@ MonoBehaviour:
   playerSelectedOrigin: {fileID: 0}
   playerSelectedDestination: {fileID: 0}
   existingNodes: []
-  globalDrainRate: 0
-  globalChargeRate: 0
-  passiveChargeInterval: 0
+  globalDrainRate: 1
+  globalChargeRate: 1
+  globalMaxCharge: 50
+  passiveChargeInterval: 1
 --- !u!4 &2010989827
 Transform:
   m_ObjectHideFlags: 0

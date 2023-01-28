@@ -13,22 +13,23 @@ public class ImmuneSystem : MonoBehaviour
     #region Private And Protected
     private float _timeElapsed;
     private List<GameNodeUI> _controlledNodes = new List<GameNodeUI>();
-	#endregion
+    #endregion
 
-	
-	#region Unity API
-	
+
+    #region Unity API
+
     private void Start()
     {
-        
+
     }
 
     private void Update()
     {
         _timeElapsed += Time.deltaTime;
-        if(_timeElapsed > timeBeforeAction)
+        if (_timeElapsed > timeBeforeAction)
         {
             LookForWeakestNeighbor();
+            _timeElapsed= 0;
         }
     }
 
@@ -47,20 +48,19 @@ public class ImmuneSystem : MonoBehaviour
         {
             node.neighbors.ForEach(neighbor =>
             {
-                if(neighbor.CurrentFaction != Faction.ImmuneSystem)
+                if (neighbor.CurrentFaction != Faction.ImmuneSystem)
                 {
-                    allNeighbors.Add(node);
+                    allNeighbors.Add(neighbor);
                 }
             });
         });
-
-        var weakestNeighbor = allNeighbors.OrderByDescending(x => x.NodeValue).First();
+        var weakestNeighbor = allNeighbors.OrderBy(x => x.NodeValue).First();
         AttackNode(weakestNeighbor);
     }
 
     public void AttackNode(GameNodeUI node)
     {
-        Debug.Log($"Immune System is attempting a move on node {node}");
+        Debug.Log($"Immune System is attempting a move on node {node} ({node.CurrentFaction} : {node.NodeValue})");
     }
 
     public void AddNodeToCapturedList(GameNodeUI node)
@@ -77,7 +77,19 @@ public class ImmuneSystem : MonoBehaviour
 
     #region Singleton
     private static ImmuneSystem _instance;
-    public static ImmuneSystem Instance { get { return _instance; } }
+    public static ImmuneSystem Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<ImmuneSystem>();
+                if (_instance != null)
+                    DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
     #endregion
 }
 
