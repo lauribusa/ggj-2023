@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dw2iak0crlcu2"]
+
+[ext_resource type="Shader" uid="uid://dd3igkytkqnuo" path="res://Assets/Shaders/shader_wavering.tres" id="1_kk102"]
+[ext_resource type="Texture2D" uid="uid://c7tq5ll4jmt6g" path="res://Assets/Textures/corruptCell_albedo.png" id="2_k4agm"]
+[ext_resource type="Texture2D" uid="uid://0dxtex1f3a08" path="res://Assets/Textures/corruptCell_roughness.png" id="3_jlgvj"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_kk102")
+shader_parameter/Albedo = ExtResource("2_k4agm")
+shader_parameter/Roughness = ExtResource("3_jlgvj")
