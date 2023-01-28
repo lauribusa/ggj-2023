@@ -16,8 +16,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="GameNode" type="Area2D" node_paths=PackedStringArray("powerValueLabel", "sprite")]
 script = ExtResource("1_ufjkq")
-closeNeighborsNodes = []
-farNeighborsNodes = []
+currentPowerValue = 50
 powerValueLabel = NodePath("MarginContainer/Label")
 sprite = NodePath("TextureRect")
 

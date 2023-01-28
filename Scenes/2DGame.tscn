@@ -15,34 +15,20 @@ anchor_mode = 0
 current = true
 
 [node name="GameNode" parent="." instance=ExtResource("4_5icv5")]
-position = Vector2(176, 183)
-closeNeighborsNodes = [NodePath("../GameNode2")]
-currentPowerValue = 20
-chargeRate = 1
-isMainNode = true
-
-[node name="GameNode2" parent="." instance=ExtResource("4_5icv5")]
-position = Vector2(682, 266)
-closeNeighborsNodes = [NodePath("../GameNode")]
-currentPowerValue = 40
-chargeRate = 1
-
-[node name="GameNode3" parent="." instance=ExtResource("4_5icv5")]
-position = Vector2(613, 100)
-closeNeighborsNodes = [NodePath("../GameNode2")]
+position = Vector2(219, 193)
 currentPowerValue = 30
 chargeRate = 1
 
+[node name="GameNode2" parent="." instance=ExtResource("4_5icv5")]
+position = Vector2(648, 262)
+
+[node name="GameNode3" parent="." instance=ExtResource("4_5icv5")]
+position = Vector2(541, 144)
+
 [node name="GameNode4" parent="." node_paths=PackedStringArray("powerValueLabel") instance=ExtResource("4_5icv5")]
 position = Vector2(261, 473)
-CurrentFaction = 1
-currentPowerValue = 14
-chargeRate = 1
 powerValueLabel = NodePath("../GameNode2/MarginContainer/Label")
 
 [node name="GameNode5" parent="." node_paths=PackedStringArray("powerValueLabel") instance=ExtResource("4_5icv5")]
 position = Vector2(905, 547)
-CurrentFaction = 2
-currentPowerValue = 45
-chargeRate = 1
 powerValueLabel = NodePath("../GameNode2/MarginContainer/Label")
