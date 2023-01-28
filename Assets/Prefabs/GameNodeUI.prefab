@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1749957570781608401}
   - component: {fileID: 6669873313883052159}
   - component: {fileID: 5379132872937577760}
+  - component: {fileID: 428015042512026352}
   m_Layer: 5
   m_Name: GameNodeUI
   m_TagString: Untagged
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -121,6 +122,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &428015042512026352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615258213035630003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5224753c3a62ca7408bbb10707137a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cell: {fileID: 0}
+  valueText: {fileID: 5564958359410634857}
+  closeNeighbors: []
+  farNeighbors: []
+  neighbors: []
+  chargeRate: 0
+  nodeValue: 0
 --- !u!1 &2216156169181019073
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02d46582c045fab438eb23a18b63554d, type: 2}
   m_sharedMaterial: {fileID: -8985873712150326778, guid: 02d46582c045fab438eb23a18b63554d, type: 2}
@@ -213,7 +233,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.2
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
