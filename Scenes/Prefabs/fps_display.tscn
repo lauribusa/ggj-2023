@@ -1,8 +1,7 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://ccsjgopsy1jsh"]
 
 [ext_resource type="LabelSettings" uid="uid://b6gfcexlr841i" path="res://fps_label_settings.tres" id="1_pgr12"]
 [ext_resource type="Script" path="res://Scripts/SettingsMenu/FpsDisplay.cs" id="2_51tq0"]
-
 
 [node name="FPSDisplay" type="Label"]
 visible = false

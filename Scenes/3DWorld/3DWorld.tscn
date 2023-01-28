@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce67jh0ilq88j"]
+
+[ext_resource type="PackedScene" uid="uid://ojc65e7qngn7" path="res://Scenes/Prefabs/prefab_tentacleMedium.tscn" id="2_0a2gg"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.84206)
+current = true
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98256, 2.27006, 3.18323)
+
+[node name="Tentacle_Medium" parent="." instance=ExtResource("2_0a2gg")]

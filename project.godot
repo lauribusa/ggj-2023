@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 
 FpsDisplay="*res://Scenes/Prefabs/fps_display.tscn"
 MusicPlayer="*res://Scenes/Prefabs/music_player.tscn"
+GameManager="*res://Scenes/Prefabs/GameManager.tscn"
 
 [display]
 
