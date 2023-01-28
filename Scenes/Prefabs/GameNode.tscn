@@ -10,12 +10,16 @@ radius = 32.0
 [sub_resource type="LabelSettings" id="LabelSettings_bgrqd"]
 line_spacing = 0.0
 font = ExtResource("3_031r4")
+font_color = Color(0.972549, 0.541176, 0.596078, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
-[node name="GameNode" type="Area2D" node_paths=PackedStringArray("powerValueLabel")]
+[node name="GameNode" type="Area2D" node_paths=PackedStringArray("powerValueLabel", "sprite")]
 script = ExtResource("1_ufjkq")
 closeNeighborsNodes = []
 farNeighborsNodes = []
 powerValueLabel = NodePath("MarginContainer/Label")
+sprite = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
@@ -56,6 +60,9 @@ vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 uppercase = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseLeft"]

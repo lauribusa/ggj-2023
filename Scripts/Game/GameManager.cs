@@ -14,8 +14,10 @@ public partial class GameManager : Node2D
 {
 	
 	// Called when the node enters the scene tree for the first time.
-	public GameNode originNode;
-	public GameNode destinationNode;
+	public GameNode playerOriginNode;
+	public GameNode playerDestinationNode;
+	public GameNode enemyOriginNode;
+	public GameNode enemyDestinationNode;
 	private static GameManager _instance;
 
     [Signal] public delegate void NodeSelectedEventHandler(GameNode nodeFrom, GameNode nodeTo);
@@ -43,7 +45,7 @@ public partial class GameManager : Node2D
 		if (nodeFrom.currentPowerValue >= nodeTo.currentPowerValue)
 		{
 			nodeTo.currentFaction = nodeFrom.currentFaction;
-			nodeTo.currentPowerValue = Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
+			nodeTo.currentPowerValue += Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 			nodeFrom.currentPowerValue -= Mathf.FloorToInt(nodeFrom.currentPowerValue * 0.5f);
 		}
 		GD.Print(nodeFrom.Name, nodeFrom.currentFaction);
@@ -61,6 +63,23 @@ public partial class GameManager : Node2D
 		{
 			EmitSignal("GameEnd", true);
 		}
+		if(HasOriginSelected() && HasDestinationSelected())
+		{
+			playerOriginNode.DecreasePower();
+			if(playerDestinationNode.currentFaction == Faction.Parasite)
+			{
+				if (playerDestinationNode.currentPowerValue >= maxValueOnNodes) playerDestinationNode.SetPower(maxValueOnNodes);
+				playerDestinationNode.IncreasePower();
+			} else
+			{
+				playerDestinationNode.DecreasePower();
+				if(playerDestinationNode.currentPowerValue <= 0)
+				{
+					// switch faction
+				}
+			}
+
+		}
 	}
 
     public override void _Draw()
@@ -75,32 +94,37 @@ public partial class GameManager : Node2D
 
     public void SelectOriginNode(GameNode node)
 	{
-		originNode = node;
-		node.SelfModulate = Color.Color8(255, 0, 0);
+		playerOriginNode = node;
+		node.sprite.SelfModulate = Color.Color8(255, 0, 0);
 		GD.Print("Added origin: "+node.Name);
 	}
 
 	public void SelectDestinationNode(GameNode node)
 	{
-		destinationNode = node;
-		node.SelfModulate = Color.Color8(0, 255, 0);
+		playerDestinationNode = node;
+		node.sprite.SelfModulate = Color.Color8(0, 255, 0);
 		GD.Print("Added destination: "+node.Name);
         _Draw();
-		EmitSignal("NodeSelected", originNode, node);
+		EmitSignal("NodeSelected", playerOriginNode, node);
     }
 
 	private void DrawConnection()
 	{
-		if (destinationNode is null || originNode is null) return;
-        DrawDashedLine(originNode.Position, destinationNode.Position, Color.Color8(255, 0, 0));
+		if (playerDestinationNode is null || playerOriginNode is null) return;
+        DrawDashedLine(playerOriginNode.Position, playerDestinationNode.Position, Color.Color8(255, 0, 0));
     }
 
 	private void OnNodeUnselected(GameNode node, bool isOrigin)
 	{
-		node.SelfModulate = Color.Color8(255, 255, 255);
+		node.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		if(isOrigin)
 		{
-			if (node.currentFaction == Faction.Parasite) originNode = node;
+			if (playerDestinationNode.currentFaction == Faction.Parasite)
+			{
+				var _newNode = playerDestinationNode;
+				CleanSelectedNodes();
+				SelectOriginNode(_newNode);
+			}
 		}
 	}
 
@@ -113,36 +137,39 @@ public partial class GameManager : Node2D
 
 	public bool HasOriginSelected()
 	{
-		return originNode != null;
+        return playerOriginNode != null;
 	}
 
 	public bool HasDestinationSelected()
 	{
-		return destinationNode != null;
+		return playerDestinationNode != null;
 	}
 
 	public bool HasNoDestination()
 	{
-		return destinationNode == null;
+		return playerDestinationNode == null;
 	}
 
 	public void CleanSelectedNodes()
 	{
-		originNode = null;
-		destinationNode = null;
+		if (playerOriginNode is not null) playerOriginNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
+		playerOriginNode = null;
+		playerDestinationNode = null;
 	}
 
 	public void RemoveOriginNode(GameNode node)
 	{
+        playerOriginNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		GD.Print("Removed origin.");
-		EmitSignal("NodeUnselected",node, true);
-		originNode = null;
+        EmitSignal("NodeUnselected",node, true);
+		playerOriginNode = null;
 	}
 
 	public void RemoveDestinationNode(GameNode node)
 	{
+        playerDestinationNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		GD.Print("Removed destination.");
 		EmitSignal("NodeUnselected", node, false);
-		destinationNode = null;
+        playerDestinationNode = null;
 	}
 }
