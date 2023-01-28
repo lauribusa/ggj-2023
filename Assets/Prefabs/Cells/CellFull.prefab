@@ -49,8 +49,8 @@ MonoBehaviour:
   _neutralCell: {fileID: 2175795873123007365}
   _immuneCell: {fileID: 6560704013757466977}
   _corruptCell: {fileID: 8497084177036474953}
-  _tentacleMediumPrefab: {fileID: 7604287717284904000, guid: 176f4d56e4df69f488a542ff7d39b13c, type: 3}
-  _tentacleLongPrefab: {fileID: 8885137950623270756, guid: 7074d45cc8d2b674591b676df5e88fd1, type: 3}
+  _tentacleMediumPrefab: {fileID: 1306075578, guid: 176f4d56e4df69f488a542ff7d39b13c, type: 3}
+  _tentacleLongPrefab: {fileID: 4063319786346752122, guid: 7074d45cc8d2b674591b676df5e88fd1, type: 3}
 --- !u!1001 &2915835611470861076
 PrefabInstance:
   m_ObjectHideFlags: 0
