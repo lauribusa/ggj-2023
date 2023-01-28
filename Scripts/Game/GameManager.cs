@@ -44,7 +44,23 @@ public partial class GameManager : Node2D
     private void OnNodeSelected(GameNode nodeFrom, GameNode nodeTo)
     {
 		if (nodeFrom.CurrentFaction != Faction.Parasite) return;
-		
+		var _nodeIsNeighbor = false;
+		var _nodeIsClose = false;
+		for (int i = 0; i < nodeFrom.closeNeighborsNodes.Count; i++)
+		{
+			GameNode node = GetNode(nodeFrom.closeNeighborsNodes[i]) as GameNode;
+			if (node == nodeTo)
+			{
+				_nodeIsNeighbor = true;
+				_nodeIsClose = true;
+			}
+		}
+		for (int i = 0; i < nodeFrom.farNeighborsNodes.Count; i++)
+		{
+            GameNode node = GetNode(nodeFrom.farNeighborsNodes[i]) as GameNode;
+            if (node == nodeTo) _nodeIsNeighbor = true;
+        }
+		if (!_nodeIsNeighbor) return;
 		if (nodeFrom.currentPowerValue >= nodeTo.currentPowerValue)
 		{
 			nodeTo.CurrentFaction = nodeFrom.CurrentFaction;
@@ -126,12 +142,13 @@ public partial class GameManager : Node2D
 		node.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		if(isOrigin)
 		{
-			if (playerDestinationNode.CurrentFaction == Faction.Parasite)
+			if (playerDestinationNode is not null && playerDestinationNode.CurrentFaction == Faction.Parasite)
 			{
 				var _newNode = playerDestinationNode;
 				CleanSelectedNodes();
 				SelectOriginNode(_newNode);
 			}
+			
 		}
 	}
 

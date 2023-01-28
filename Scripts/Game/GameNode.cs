@@ -1,16 +1,14 @@
 using Godot;
 using Godot.Collections;
-using Godot.NativeInterop;
-using System;
-using System.Linq;
-using System.Xml.Linq;
+using System.Collections.Generic;
+
 
 namespace Game;
 [Tool]
 public partial class GameNode : Area2D
 {
     // Called when the node enters the scene tree for the first time.
-    public Array<NodePath> neighbors;
+    public List<NodePath> neighbors = new List<NodePath>();
     [Export]
     public Array<NodePath> closeNeighborsNodes;
     [Export]
@@ -49,18 +47,9 @@ public partial class GameNode : Area2D
     public override void _Ready()
     {
         SetCellFaction();
-        GD.Print(Engine.IsEditorHint());
         if (Engine.IsEditorHint()) return;
         GameManager gameManager = GetNode("/root/GameManager") as GameManager;
         gameManager.AddToNodeList(GetPath());
-        for (int i = 0; i < farNeighborsNodes.Count; i++)
-        {
-            neighbors.Add(farNeighborsNodes[i]);
-        }
-        for (int i = 0; i < closeNeighborsNodes.Count; i++)
-        {
-            neighbors.Add(closeNeighborsNodes[i]);
-        }
         UpdateValueText(currentPowerValue);
     }
 

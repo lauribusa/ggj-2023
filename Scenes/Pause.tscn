@@ -21,7 +21,7 @@ settingsMenuPath = NodePath("SettingsWindow")
 quitConfirmPath = NodePath("ConfirmationDialog")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -29,7 +29,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.490196)
 
 [node name="Container" type="MarginContainer" parent="."]
-anchors_preset = -1
+layout_mode = 0
 anchor_left = 0.233
 anchor_right = 0.767
 anchor_bottom = 1.0
@@ -39,21 +39,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container"]
-offset_top = 370.0
-offset_right = 770.0
-offset_bottom = 710.0
+layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
 [node name="Resume" type="ColorRect" parent="Container/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
-offset_right = 770.0
-offset_bottom = 100.0
+layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ResumeButton" type="Button" parent="Container/VBoxContainer/Resume"]
 custom_minimum_size = Vector2(0, 100)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -63,14 +60,12 @@ text = "_common.resume"
 
 [node name="Settings" type="ColorRect" parent="Container/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
-offset_top = 120.0
-offset_right = 770.0
-offset_bottom = 220.0
+layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SettingsButton" type="Button" parent="Container/VBoxContainer/Settings"]
 custom_minimum_size = Vector2(0, 100)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -80,14 +75,12 @@ text = "start.settings"
 
 [node name="Quit" type="ColorRect" parent="Container/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
-offset_top = 240.0
-offset_right = 770.0
-offset_bottom = 340.0
+layout_mode = 2
 color = Color(0, 0, 0, 1)
 
 [node name="QuitButton" type="Button" parent="Container/VBoxContainer/Quit"]
 custom_minimum_size = Vector2(0, 100)
-anchors_preset = 15
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -110,7 +103,7 @@ showBackToMain = true
 [connection signal="pressed" from="Container/VBoxContainer/Resume/ResumeButton" to="." method="ResumeGame"]
 [connection signal="pressed" from="Container/VBoxContainer/Settings/SettingsButton" to="." method="OpenSettings"]
 [connection signal="pressed" from="Container/VBoxContainer/Quit/QuitButton" to="." method="OpenQuitDialog"]
-[connection signal="cancelled" from="ConfirmationDialog" to="." method="OnQuitDialogCancel"]
+[connection signal="canceled" from="ConfirmationDialog" to="." method="OnQuitDialogCancel"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="QuitGame"]
 [connection signal="custom_action" from="ConfirmationDialog" to="." method="BackToMain"]
 [connection signal="visibility_changed" from="ConfirmationDialog" to="ConfirmationDialog" method="OnVisibilityChanged"]
