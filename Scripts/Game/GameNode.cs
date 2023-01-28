@@ -48,6 +48,7 @@ public partial class GameNode : Area2D
 
     public override void _Ready()
     {
+        _cell.GameNode = this;
         SetCellFaction();
         GD.Print(Engine.IsEditorHint());
         if (Engine.IsEditorHint()) return;
