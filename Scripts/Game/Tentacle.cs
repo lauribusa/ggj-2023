@@ -29,13 +29,13 @@ public partial class Tentacle : Node3D
 
     public void Deploy()
     {
-        _animPlayer.Play(MEDIUM_DEPLOY);
+        _animPlayer.Play(DEPLOY);
         _isDeployed = true;
     }
 
     public void Retract()
     {
-        _animPlayer.PlayBackwards(MEDIUM_DEPLOY);
+        _animPlayer.PlayBackwards(DEPLOY);
         _isDeployed = false;
     }
 
@@ -44,7 +44,7 @@ public partial class Tentacle : Node3D
 
     #region Private And Protected
 
-    private static readonly StringName MEDIUM_DEPLOY = "medium_deploy";
+    private static readonly StringName DEPLOY = "deploy";
 
     private AnimationPlayer _animPlayer;
     private bool _isDeployed;
