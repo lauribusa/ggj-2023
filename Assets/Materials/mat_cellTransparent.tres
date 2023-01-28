@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dkkteb14icq5r"]
+
+[ext_resource type="Texture2D" uid="uid://tusr56c5b04g" path="res://Assets/Textures/cell_albedoAlpha.png" id="1_tmpay"]
+[ext_resource type="Texture2D" uid="uid://dxwtsgw8xc58y" path="res://Assets/Textures/cell_roughness.png" id="2_vnwbh"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_tmpay")
+roughness_texture = ExtResource("2_vnwbh")
