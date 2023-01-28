@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://xl6xkjn6o3ba"]
+[gd_scene load_steps=3 format=3 uid="uid://dp6hjhxeh0b1q"]
 
-[ext_resource type="Script" path="res://Scripts/MainMenu/MouseLock.cs" id="1_tvg1r"]
+[ext_resource type="Script" path="res://Scripts/MainMenu/TestCamera.cs" id="1_8061n"]
 [ext_resource type="PackedScene" uid="uid://dglyn6mwjl0wj" path="res://Scenes/Pause.tscn" id="2_yoaq4"]
 
 [node name="Node2D" type="Node2D"]
 process_mode = 3
-script = ExtResource("1_tvg1r")
+script = ExtResource("1_8061n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
