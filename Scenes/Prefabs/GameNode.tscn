@@ -61,8 +61,5 @@ clip_text = true
 text_overrun_behavior = 3
 uppercase = true
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [connection signal="mouse_entered" from="." to="." method="OnMouseEnter"]
 [connection signal="mouse_exited" from="." to="." method="OnMouseLeft"]

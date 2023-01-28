@@ -1,5 +1,6 @@
 using Godot;
 using Godot.Collections;
+using Godot.NativeInterop;
 using System;
 using System.Linq;
 using System.Xml.Linq;
@@ -9,7 +10,7 @@ namespace Game;
 public partial class GameNode : Area2D
 {
     // Called when the node enters the scene tree for the first time.
-    public Array<GameNode> neighbors;
+    public Array<NodePath> neighbors;
     [Export]
     public Array<NodePath> closeNeighborsNodes;
     [Export]
@@ -48,9 +49,18 @@ public partial class GameNode : Area2D
     public override void _Ready()
     {
         SetCellFaction();
+        GD.Print(Engine.IsEditorHint());
         if (Engine.IsEditorHint()) return;
         GameManager gameManager = GetNode("/root/GameManager") as GameManager;
         gameManager.AddToNodeList(GetPath());
+        for (int i = 0; i < farNeighborsNodes.Count; i++)
+        {
+            neighbors.Add(farNeighborsNodes[i]);
+        }
+        for (int i = 0; i < closeNeighborsNodes.Count; i++)
+        {
+            neighbors.Add(closeNeighborsNodes[i]);
+        }
         UpdateValueText(currentPowerValue);
     }
 
@@ -68,25 +78,12 @@ public partial class GameNode : Area2D
                 var node = GetNode<GameNode>(closeNeighborsNodes[i]);
                 DrawConnection(node);
             }
-        } else
-        {
-            for (int i = 0; i < farNeighborsNodes.Count; i++)
-            {
-                var node = GetNode<GameNode>(farNeighborsNodes[i]);
-                neighbors.Add(node);
-            }
-            for (int i = 0; i < closeNeighborsNodes.Count; i++)
-            {
-                var node = GetNode<GameNode>(closeNeighborsNodes[i]);
-                neighbors.Add(node);
-            }
         }
     }
     public override void _Process(double delta)
     {
         if (Engine.IsEditorHint()) {
             QueueRedraw();
-        
         } else
         {
             if (CurrentFaction == Faction.Neutral) return;
@@ -101,6 +98,7 @@ public partial class GameNode : Area2D
     }
     private void UpdateValueText(int value)
     {
+        GD.Print(value);
         powerValueLabel.Text = value.ToString();
     }
     private void DrawConnection(GameNode toNode)
@@ -189,7 +187,6 @@ public partial class GameNode : Area2D
     private void SetCellFaction()
     {
         if (_cell == null) return;
-
         switch (_currentFaction)
         {
             case Faction.Neutral:

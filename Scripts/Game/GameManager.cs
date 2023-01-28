@@ -27,7 +27,7 @@ public partial class GameManager : Node2D
 
     public static GameManager Instance { get => _instance; }
 
-	public Array<GameNode> gameNodes;
+	public Array<NodePath> gameNodes = new Array<NodePath>();
 	public GameNode playerBase;
 	public GameNode enemyBase;
 	[Export]
@@ -101,6 +101,7 @@ public partial class GameManager : Node2D
 
     public void SelectOriginNode(GameNode node)
 	{
+		if (node.CurrentFaction != Faction.Parasite) return;
 		playerOriginNode = node;
 		node.sprite.SelfModulate = Color.Color8(255, 0, 0);
 		GD.Print("Added origin: "+node.Name);
@@ -137,7 +138,7 @@ public partial class GameManager : Node2D
     public void AddToNodeList(NodePath node)
 	{
 		GameNode gameNode = GetNode(node) as GameNode;
-		gameNodes.Add(gameNode);
+		gameNodes.Add(node);
 		GD.Print(gameNode.Name);
 	}
 
