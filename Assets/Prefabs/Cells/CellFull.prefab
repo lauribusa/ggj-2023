@@ -50,8 +50,6 @@ MonoBehaviour:
   _neutralCell: {fileID: 2175795873123007365}
   _immuneCell: {fileID: 6560704013757466977}
   _corruptCell: {fileID: 8497084177036474953}
-  _tentacleMediumPrefab: {fileID: 1306075578, guid: 176f4d56e4df69f488a542ff7d39b13c, type: 3}
-  _tentacleLongPrefab: {fileID: 4063319786346752122, guid: 7074d45cc8d2b674591b676df5e88fd1, type: 3}
 --- !u!114 &2669398588383071001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c6321324c42e44cb3dce5b7201bb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _neighbors: []
+  <Neighbors>k__BackingField: []
+  _tentacleMediumPrefab: {fileID: 1306075578, guid: 176f4d56e4df69f488a542ff7d39b13c, type: 3}
+  _tentacleLongPrefab: {fileID: 4063319786346752122, guid: 7074d45cc8d2b674591b676df5e88fd1, type: 3}
 --- !u!1001 &2915835611470861076
 PrefabInstance:
   m_ObjectHideFlags: 0

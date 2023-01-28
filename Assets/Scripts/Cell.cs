@@ -13,28 +13,7 @@ public class Cell : MonoBehaviour
     [SerializeField]
     private GameObject _corruptCell;
 
-    [SerializeField]
-    private Tentacle _tentacleMediumPrefab;
-
-    [SerializeField]
-    private Tentacle _tentacleLongPrefab;
-
     #endregion
-
-
-    #region Unity API
-
-    private void Awake()
-    {
-        GenerateTentacles();
-    }
-
-    private void Update()
-    {
-        
-    }
-	
-	#endregion
 	
 	
 	#region Utils
@@ -58,16 +37,6 @@ public class Cell : MonoBehaviour
         _neutralCell.SetActive(false);
         _immuneCell.SetActive(false);
         _corruptCell.SetActive(true);
-    }
-
-    private void GenerateTentacles()
-    {
-        var neighbors = GetComponent<CellNeighborsChecker>().Neighbors;
-        foreach (var neighbor in neighbors)
-        {
-            var tentacle = Instantiate(_tentacleLongPrefab, transform);
-            tentacle.Transform.LookAt(neighbor.position);
-        }
     }
 
     #endregion
