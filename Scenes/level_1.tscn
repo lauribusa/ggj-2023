@@ -93,29 +93,29 @@ _cell = NodePath("../SubViewportContainer/SubViewport/Cell")
 [node name="GameNode2" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(655, 464)
 farNeighborsNodes = [NodePath("../GameNode"), NodePath("../GameNode3"), NodePath("../GameNode4")]
-CurrentFaction = 2
 _cell = NodePath("../SubViewportContainer/SubViewport/Cell2")
+CurrentFaction = 2
 
 [node name="GameNode3" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(960, 292)
 farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
-CurrentFaction = 2
 _cell = NodePath("../SubViewportContainer/SubViewport/Cell3")
+CurrentFaction = 2
 
 [node name="GameNode4" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(960, 635)
 farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
-CurrentFaction = 2
 _cell = NodePath("../SubViewportContainer/SubViewport/Cell4")
+CurrentFaction = 2
 
 [node name="GameNode5" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(1242, 465)
 farNeighborsNodes = [NodePath("../GameNode3"), NodePath("../GameNode4"), NodePath("../GameNode6")]
-CurrentFaction = 2
 _cell = NodePath("../SubViewportContainer/SubViewport/Cell5")
+CurrentFaction = 2
 
 [node name="GameNode6" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
 position = Vector2(1623, 465)
 farNeighborsNodes = [NodePath("../GameNode5")]
-CurrentFaction = 1
 _cell = NodePath("../SubViewportContainer/SubViewport/Cell6")
+CurrentFaction = 1
