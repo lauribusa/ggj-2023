@@ -13,28 +13,7 @@ public class Cell : MonoBehaviour
     [SerializeField]
     private GameObject _corruptCell;
 
-    [SerializeField]
-    private Tentacle _tentacleMediumPrefab;
-
-    [SerializeField]
-    private Tentacle _tentacleLongPrefab;
-
     #endregion
-
-
-    #region Unity API
-
-    private void Awake()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-	
-	#endregion
 	
 	
 	#region Utils
@@ -59,13 +38,6 @@ public class Cell : MonoBehaviour
         _immuneCell.SetActive(false);
         _corruptCell.SetActive(true);
     }
-
-    #endregion
-
-
-    #region Private and Protected
-
-
 
     #endregion
 }

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 74c6321324c42e44cb3dce5b7201bb4c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _tentacleMediumPrefab: {fileID: 1306075578, guid: 176f4d56e4df69f488a542ff7d39b13c, type: 3}
+  - _tentacleLongPrefab: {fileID: 4063319786346752122, guid: 7074d45cc8d2b674591b676df5e88fd1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
