@@ -43,7 +43,6 @@ public class TentacleGenerator : MonoBehaviour
         {
             var tentacle = Instantiate(_tentacleLongPrefab, Transform);
             tentacle.Transform.LookAt(neighbor.position);
-            tentacle.Deploy();
         }
     }
 
