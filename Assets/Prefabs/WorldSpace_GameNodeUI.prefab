@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8196828939579635609}
   - component: {fileID: 8196828939579635608}
   - component: {fileID: 856040651762793226}
+  - component: {fileID: 996389655144753033}
   m_Layer: 5
   m_Name: WorldSpace_GameNodeUI
   m_TagString: Untagged
@@ -27,7 +28,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8196828939579635615}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.0852307, y: 0.71117014, z: 0.112402655, w: 0.6887224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.409375, y: 0.409375, z: 0.409375}
   m_Children:
@@ -111,6 +112,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7173378438d85d4fa5794478ee9d66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &996389655144753033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8196828939579635615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394917f334029104dbe3b8d7634c13ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3148774677155705293
