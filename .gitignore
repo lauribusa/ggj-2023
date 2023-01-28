@@ -2,6 +2,7 @@
 .godot/
 # Visual Studio
 .vs/
+Build/
 
 # Godot-specific ignores
 .import/
