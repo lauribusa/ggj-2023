@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Billboard : MonoBehaviour
 {
     #region Unity API

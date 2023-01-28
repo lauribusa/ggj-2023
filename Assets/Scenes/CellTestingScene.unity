@@ -1125,6 +1125,8 @@ MonoBehaviour:
   globalDrainRate: 0
   globalChargeRate: 0
   globalMaxCharge: 60
+  lowChargeThreshold1: 30
+  highChargeThreshold2: 30
   passiveChargeInterval: 0
 --- !u!4 &2018416626
 Transform:
