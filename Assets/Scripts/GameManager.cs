@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public int globalDrainRate;
     public int globalChargeRate;
     public int globalMaxCharge = 60;
+    public int lowChargeThreshold1 = 30;
+    public int highChargeThreshold2 = 30;
 
     [Tooltip("Passive charge interval in seconds")]
     public float passiveChargeInterval;
@@ -95,6 +97,11 @@ public class GameManager : MonoBehaviour
         {
             playerSelectedDestination = node;
         }
+    }
+
+    public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
+    {
+        node.CurrentFaction = newFaction;
     }
 
     public void CheckIfLinkIsFormed()
