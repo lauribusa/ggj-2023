@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,8 +11,8 @@ public enum Faction
     ImmuneSystem,
     Parasite
 }
-public class NodeEvent: UnityEvent<GameNodeUI> { }
-public class LinkEvent: UnityEvent<GameNodeUI, GameNodeUI> { }
+public class NodeEvent : UnityEvent<GameNodeUI> { }
+public class LinkEvent : UnityEvent<GameNodeUI, GameNodeUI> { }
 public class GameManager : MonoBehaviour
 {
     #region Exposed
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public int globalDrainRate;
     public int globalChargeRate;
+    public int globalMaxCharge;
 
     [Tooltip("Passive charge interval in seconds")]
     public float passiveChargeInterval;
@@ -38,12 +41,11 @@ public class GameManager : MonoBehaviour
     #region Unity API
     private void Awake()
     {
-        if(FindObjectsOfType<GameManager>().Length > 1)
+        if (FindObjectsOfType(typeof(GameManager)).Length > 1)
         {
-            Debug.LogWarning("Found another GameManager, destroying.");
-            Destroy(this);
+            Debug.LogWarning("Already found instance of GameManager in scene; destroying.");
+            DestroyImmediate(gameObject);
         }
-        _instance = this;
     }
     private void Start()
     {
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(existingLinks.Count > 0)
+        if (existingLinks.Count > 0)
         {
 
         }
@@ -70,12 +72,12 @@ public class GameManager : MonoBehaviour
     }
     public void CheckIfNodeIsAlreadySelected(GameNodeUI node)
     {
-        if(playerSelectedOrigin == node)
+        if (playerSelectedOrigin == node)
         {
             Debug.Log("Already an origin.");
             return;
         }
-        if(playerSelectedDestination == node)
+        if (playerSelectedDestination == node)
         {
             Debug.Log("Already a destination.");
         }
@@ -83,11 +85,11 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeClicked(GameNodeUI node)
     {
-        if(playerSelectedOrigin is null)
+        if (playerSelectedOrigin is null)
         {
             playerSelectedOrigin = node;
         }
-        if(playerSelectedDestination is null)
+        if (playerSelectedDestination is null)
         {
             playerSelectedDestination = node;
         }
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckIfLinkIsFormed()
     {
-        if(playerSelectedOrigin.neighbors.Contains(playerSelectedDestination))
+        if (playerSelectedOrigin.neighbors.Contains(playerSelectedDestination))
         {
             linkCreatedEvent?.Invoke(playerSelectedOrigin, playerSelectedDestination);
         }
@@ -107,12 +109,32 @@ public class GameManager : MonoBehaviour
         playerSelectedDestination = null;
     }
 
+    public IEnumerator OnLinkExists(GameNodeUI from, GameNodeUI to)
+    {
+        while (from.NodeValue >= 0 && to.NodeValue < globalMaxCharge)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
     #endregion
 
 
     #region Singleton
     private static GameManager _instance;
-    public static GameManager Instance { get { return _instance; } }
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+                if (_instance != null)
+                    DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
     #endregion
 }
 

@@ -136,10 +136,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cell: {fileID: 0}
   valueText: {fileID: 5564958359410634857}
+  interactable: {fileID: 5379132872937577760}
   closeNeighbors: []
   farNeighbors: []
   neighbors: []
   chargeRate: 0
+  isFactionMainNode: 0
+  _currentFaction: 0
   nodeValue: 0
 --- !u!1 &2216156169181019073
 GameObject:

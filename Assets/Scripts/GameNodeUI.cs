@@ -3,12 +3,14 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameNodeUI : MonoBehaviour
 {
     #region Exposed
     public Cell cell;
     public TextMeshProUGUI valueText;
+    public Button interactable;
     public List<GameNodeUI> closeNeighbors;
     public List<GameNodeUI> farNeighbors;
     
@@ -28,7 +30,7 @@ public class GameNodeUI : MonoBehaviour
         set
         {
             nodeValue = value;
-            NodeValueDisplayUpdate(value);
+            NodeValueDisplayUpdate(nodeValue);
         }
     }
     [Header("Node values")]
@@ -56,6 +58,7 @@ public class GameNodeUI : MonoBehaviour
     {
         neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         GameManager.Instance.AddToNodeList(this);
+        NodeValueDisplayUpdate(nodeValue);
     }
 
     private void OnDrawGizmosSelected()
@@ -70,11 +73,7 @@ public class GameNodeUI : MonoBehaviour
     {
         if (isLinked) return;
         _timeElapsed += Time.deltaTime;
-        if(_timeElapsed > GameManager.Instance.passiveChargeInterval)
-        {
-            _timeElapsed = 0;
-            nodeValue += GameManager.Instance.globalChargeRate;
-        }
+        PassiveCharge();
     }
     
     #endregion
@@ -91,12 +90,22 @@ public class GameNodeUI : MonoBehaviour
     }
     public void PassiveCharge()
     {
-
+        if (CurrentFaction == Faction.Neutral) return;
+        if(NodeValue >= GameManager.Instance.globalMaxCharge)
+        {
+            NodeValue = GameManager.Instance.globalMaxCharge;
+            return;
+        }
+        if (_timeElapsed > GameManager.Instance.passiveChargeInterval)
+        {
+            _timeElapsed = 0;
+            NodeValue = NodeValue + GameManager.Instance.globalChargeRate;
+        }
     }
 
     public void NodeValueDisplayUpdate(int value)
     {
-        valueText.text = nodeValue.ToString();
+        valueText.text = value.ToString();
     }
 
     public void OnClickNode()
