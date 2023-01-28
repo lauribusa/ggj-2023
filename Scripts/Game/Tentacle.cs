@@ -12,10 +12,19 @@ public partial class Tentacle : Node3D
     #endregion
 
 
+    #region Exposed
+
+    public GameNode Target { get; set; }
+
+    #endregion
+
+
     #region Godot API
 
     public override void _Ready()
     {
+        _cell = GetParent<Cell>();
+        GameManager.Instance.NodeSelected += OnGameManagerNodeSelected;
         _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animPlayer.AnimationFinished += OnAnimationFinished;
     }
@@ -39,6 +48,15 @@ public partial class Tentacle : Node3D
         _isDeployed = false;
     }
 
+    private void OnGameManagerNodeSelected(GameNode nodeFrom, GameNode nodeTo)
+    {
+        if (nodeFrom != _cell.GameNode) return;
+        if (_cell.GameNode.CurrentFaction != Faction.Parasite) return;
+        if (Target != nodeTo) return;
+
+        Deploy();
+    }
+
     #endregion
 
 
@@ -47,6 +65,7 @@ public partial class Tentacle : Node3D
     private static readonly StringName DEPLOY = "deploy";
 
     private AnimationPlayer _animPlayer;
+    private Cell _cell;
     private bool _isDeployed;
 
     #endregion

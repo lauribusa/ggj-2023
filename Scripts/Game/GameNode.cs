@@ -17,7 +17,7 @@ public partial class GameNode : Area2D
     private Faction _currentFaction;
 
     [Export]
-    private Cell _cell;
+    public Cell Cell { get; set; }
 
     [Export]
     public Faction CurrentFaction
@@ -46,7 +46,7 @@ public partial class GameNode : Area2D
 
     public override void _Ready()
     {
-        _cell.GameNode = this;
+        Cell.GameNode = this;
         SetCellFaction();
         if (Engine.IsEditorHint()) return;
         GameManager gameManager = GetNode("/root/GameManager") as GameManager;
@@ -176,19 +176,19 @@ public partial class GameNode : Area2D
 
     private void SetCellFaction()
     {
-        if (_cell == null) return;
+        if (Cell == null) return;
         switch (_currentFaction)
         {
             case Faction.Neutral:
-                _cell.SetNeutral();
+                Cell.SetNeutral();
                 break;
 
             case Faction.Parasite:
-                _cell.SetCorrupt();
+                Cell.SetCorrupt();
                 break;
 
             case Faction.ImmuneSystem:
-                _cell.SetImmune();
+                Cell.SetImmune();
                 break;
         }
     }
