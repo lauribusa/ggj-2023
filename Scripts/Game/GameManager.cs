@@ -22,11 +22,12 @@ public partial class GameManager : Node2D
 
     [Signal] public delegate void NodeSelectedEventHandler(GameNode nodeFrom, GameNode nodeTo);
 	[Signal] public delegate void NodeUnselectedEventHandler(GameNode node, bool isOrigin);
+	[Signal] public delegate void NodeCapturedEventHandler(GameNode node, Faction newFaction);
 	[Signal] public delegate void GameEndEventHandler(bool playerWins);
 
     public static GameManager Instance { get => _instance; }
 
-	public Array<GameNode> gameNodes;
+	public Array<GameNode> gameNodes = new Array<GameNode>();
 	public GameNode playerBase;
 	public GameNode enemyBase;
 	[Export]
@@ -50,6 +51,17 @@ public partial class GameManager : Node2D
 		}
 		GD.Print(nodeFrom.Name, nodeFrom.currentFaction);
 		GD.Print(nodeTo.Name, nodeFrom.currentFaction);
+		for (int i = 0; i < gameNodes.Count; i++)
+		{
+			if (gameNodes[i].isMainNode && gameNodes[i].currentFaction == Faction.Parasite)
+			{
+				playerBase = gameNodes[i];
+			}
+            if (gameNodes[i].isMainNode && gameNodes[i].currentFaction == Faction.ImmuneSystem)
+            {
+                playerBase = gameNodes[i];
+            }
+        }
     }
     public override void _Process(double delta)
 	{
@@ -97,6 +109,7 @@ public partial class GameManager : Node2D
 		playerOriginNode = node;
 		node.sprite.SelfModulate = Color.Color8(255, 0, 0);
 		GD.Print("Added origin: "+node.Name);
+		EmitSignal("NodeSelected", playerO)
 	}
 
 	public void SelectDestinationNode(GameNode node)

@@ -5,6 +5,11 @@
 
 [node name="2DGame" type="Node2D"]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("3_e7kdd")]
+visible = false
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
@@ -19,11 +24,6 @@ chargeRate = 1
 position = Vector2(686, 281)
 currentPowerValue = 40
 chargeRate = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Pause" parent="CanvasLayer" instance=ExtResource("3_e7kdd")]
-visible = false
 
 [node name="GameNode3" parent="." instance=ExtResource("4_5icv5")]
 position = Vector2(613, 100)
