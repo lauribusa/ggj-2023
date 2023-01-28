@@ -1,19 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh8dd25wrm1y8"]
+[gd_scene load_steps=5 format=3 uid="uid://dq4qyg20sb13h"]
 
-[ext_resource type="PackedScene" uid="uid://blsurfh7gkblm" path="res://Assets/Meshes/mesh_cell.glb" id="1_8cjkn"]
-[ext_resource type="Material" uid="uid://dkkteb14icq5r" path="res://Assets/Materials/mat_cellTransparent.tres" id="2_nhdd1"]
-[ext_resource type="Material" uid="uid://djc54fd5x3hp" path="res://Assets/Materials/mat_cell.tres" id="2_y4ygx"]
+[ext_resource type="PackedScene" uid="uid://dh8dd25wrm1y8" path="res://Scenes/Prefabs/prefab_neutralcell.tscn" id="1_afwhh"]
+[ext_resource type="Script" path="res://Scenes/Prefabs/Cell.cs" id="1_y6voe"]
+[ext_resource type="PackedScene" uid="uid://cxeug5fvb0a5l" path="res://Scenes/Prefabs/prefab_defenseCell.tscn" id="2_mfjdx"]
+[ext_resource type="PackedScene" uid="uid://d30dc1bq5f4y5" path="res://Scenes/Prefabs/prefab_corruptCell.tscn" id="3_3s3f6"]
 
-[node name="Cell" instance=ExtResource("1_8cjkn")]
+[node name="Cell" type="Node3D" node_paths=PackedStringArray("_neutralCell", "_defenseCell", "_corruptCell")]
+script = ExtResource("1_y6voe")
+_neutralCell = NodePath("NeutralCell")
+_defenseCell = NodePath("DefenseCell")
+_corruptCell = NodePath("CorruptCell")
 
-[node name="Skeleton3D" parent="rig_cell" index="0"]
-bones/0/scale = Vector3(1.04603, 1, 1.04603)
-bones/1/position = Vector3(0, 0.415319, 0)
-bones/1/scale = Vector3(1.0396, 1.0396, 1.0396)
+[node name="NeutralCell" parent="." instance=ExtResource("1_afwhh")]
 
-[node name="cell" parent="rig_cell/Skeleton3D" index="0"]
-surface_material_override/0 = ExtResource("2_nhdd1")
-surface_material_override/1 = ExtResource("2_y4ygx")
+[node name="DefenseCell" parent="." instance=ExtResource("2_mfjdx")]
+visible = false
 
-[node name="AnimationPlayer" parent="." index="1"]
-autoplay = "breath"
+[node name="CorruptCell" parent="." instance=ExtResource("3_3s3f6")]
+visible = false
