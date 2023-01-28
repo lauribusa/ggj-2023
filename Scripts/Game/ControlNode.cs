@@ -45,8 +45,6 @@ public partial class ControlNode : Area3D
 			var intersect = PhysicsRayQueryParameters3D.Create(from, to);
 			var collision = GetWorld3d().DirectSpaceState.IntersectRay(intersect);
 			
-			//GlobalPosition.Lerp((Vector3)collision["Position"], lerpSpeed * (float)delta);
-			
 			GlobalPosition = new Vector3(to.x, to.y, 0);
 			//GlobalTranslate((Vector3)GlobalPosition.Lerp(new Vector3(mouseToWorldPoint.x, mouseToWorldPoint.y, originalPosition.z), (float)(lerpSpeed * delta)));
 			//GlobalPosition = (Vector3)GlobalPosition.Lerp(new Vector3(mouseToWorldPoint.x, mouseToWorldPoint.y, originalPosition.z), (float)(lerpSpeed * delta));
