@@ -47,6 +47,7 @@ public partial class GameNode : Area2D
 
     public override void _Ready()
     {
+        SetCellFaction();
         if (Engine.IsEditorHint()) return;
         GameManager gameManager = GetNode("/root/GameManager") as GameManager;
         gameManager.AddToNodeList(GetPath());

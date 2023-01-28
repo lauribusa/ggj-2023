@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dx02cw617vkoe"]
+[gd_scene load_steps=8 format=3 uid="uid://cj7e26odchmel"]
 
-[ext_resource type="PackedScene" uid="uid://dh8dd25wrm1y8" path="res://Scenes/Prefabs/prefab_cell.tscn" id="1_ebmlf"]
+[ext_resource type="PackedScene" uid="uid://dq4qyg20sb13h" path="res://Scenes/Prefabs/prefab_cell.tscn" id="1_ebmlf"]
 [ext_resource type="PackedScene" uid="uid://w8ycoony5htd" path="res://Scenes/Prefabs/prefab_tentacleLong.tscn" id="2_iyeah"]
-[ext_resource type="PackedScene" uid="uid://d30dc1bq5f4y5" path="res://Scenes/Prefabs/prefab_corruptCell.tscn" id="2_rf3bt"]
-[ext_resource type="PackedScene" uid="uid://bikg6xig5fxpf" path="res://Scenes/Prefabs/prefab_defenseCell.tscn" id="3_o6oem"]
+[ext_resource type="PackedScene" uid="uid://k0mb3quyhjps" path="res://Scenes/Prefabs/GameNode.tscn" id="3_qrd4w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_o0fhl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -23,53 +22,100 @@ size = Vector2(39.05, 26.15)
 
 [node name="Level_1" type="Node"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(1920, 1080)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_5x0pk")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 11.689, 0)
 projection = 1
 size = 25.0
 
-[node name="Ground" type="MeshInstance3D" parent="."]
+[node name="Ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
 mesh = SubResource("PlaneMesh_qwt3c")
+skeleton = NodePath("../../..")
 
-[node name="Cell" parent="." instance=ExtResource("1_ebmlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.97642)
+[node name="Cell" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3654, 0, 0)
 
-[node name="Cell2" parent="." instance=ExtResource("1_ebmlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.95383)
+[node name="Cell2" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9735, 0, 0)
 
-[node name="Cell3" parent="." instance=ExtResource("1_ebmlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54171, 0, -0.0427299)
+[node name="Cell3" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0194731, 0, -4.00244)
 
-[node name="Cell4" parent="." instance=ExtResource("1_ebmlf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.00135, 0, -0.0427299)
+[node name="Cell4" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0194731, 0, 3.96539)
 
-[node name="CorruptCell" parent="." instance=ExtResource("2_rf3bt")]
-transform = Transform3D(1.21575, 0, 0, 0, 1.21575, 0, 0, 0, 1.21575, -15.4772, 0, 0)
+[node name="Cell5" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.53, 0, -0.0749512)
 
-[node name="Cell5" parent="." instance=ExtResource("3_o6oem")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3058, 0, 0)
+[node name="Cell6" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ebmlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2994, 0, -0.0749512)
 
-[node name="Tentacle_Long" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.511353, 0, -0.859371, 0, 1, 0, 0.859371, 0, 0.511353, -6.9043, 0, 0)
 
-[node name="Tentacle_Long5" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long5" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.0131595, 0, -0.999913, 0, 1, 0, 0.999913, 0, 0.0131595, -15.1096, 0, 0)
 
-[node name="Tentacle_Long6" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long6" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.0131595, 0, -0.999913, 0, 1, 0, 0.999913, 0, 0.0131595, 6.92216, 0, 0)
 
-[node name="Tentacle_Long2" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long2" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(-0.553842, 0, -0.832622, 0, 1, 0, 0.832622, 0, -0.553842, -6.9043, 0, 0)
 
-[node name="Tentacle_Long3" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long3" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(-0.48856, 0, -0.87253, 0, 1, 0, 0.87253, 0, -0.48856, -0.0117741, 0, -3.91867)
 
-[node name="Tentacle_Long4" parent="." instance=ExtResource("2_iyeah")]
+[node name="Tentacle_Long4" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_iyeah")]
 transform = Transform3D(0.515871, -0.0341216, -0.855986, 0.00288794, 0.99927, -0.0380928, 0.856661, 0.0171789, 0.515593, 0.157942, 0, 4)
+
+[node name="GameNode" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(295, 464)
+farNeighborsNodes = [NodePath("../GameNode2")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell")
+
+[node name="GameNode2" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(655, 464)
+farNeighborsNodes = [NodePath("../GameNode"), NodePath("../GameNode3"), NodePath("../GameNode4")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell2")
+CurrentFaction = 2
+
+[node name="GameNode3" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(960, 292)
+farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell3")
+CurrentFaction = 2
+
+[node name="GameNode4" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(960, 635)
+farNeighborsNodes = [NodePath("../GameNode2"), NodePath("../GameNode5")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell4")
+CurrentFaction = 2
+
+[node name="GameNode5" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(1242, 465)
+farNeighborsNodes = [NodePath("../GameNode3"), NodePath("../GameNode4"), NodePath("../GameNode6")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell5")
+CurrentFaction = 2
+
+[node name="GameNode6" parent="." node_paths=PackedStringArray("_cell") instance=ExtResource("3_qrd4w")]
+position = Vector2(1623, 465)
+farNeighborsNodes = [NodePath("../GameNode5")]
+_cell = NodePath("../SubViewportContainer/SubViewport/Cell6")
+CurrentFaction = 1
