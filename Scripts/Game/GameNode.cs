@@ -119,7 +119,6 @@ public partial class GameNode : Area2D
                 if (GameManager.Instance.playerOriginNode == this)
                 {
                     GameManager.Instance.RemoveOriginNode(this);
-                    //GameManager.Instance.CleanSelectedNodes();
                     return;
                 }
                 if (GameManager.Instance.HasDestinationSelected())
@@ -127,7 +126,6 @@ public partial class GameNode : Area2D
                     if (GameManager.Instance.playerDestinationNode == this)
                     {
                         GameManager.Instance.RemoveDestinationNode(this);
-                        //GameManager.Instance.CleanSelectedNodes();
                         return;
                     }
                     return;

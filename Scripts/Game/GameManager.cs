@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game;
 public enum Faction
@@ -42,6 +43,8 @@ public partial class GameManager : Node2D
 
     private void OnNodeSelected(GameNode nodeFrom, GameNode nodeTo)
     {
+		if (nodeFrom.CurrentFaction != Faction.Parasite) return;
+		
 		if (nodeFrom.currentPowerValue >= nodeTo.currentPowerValue)
 		{
 			nodeTo.CurrentFaction = nodeFrom.CurrentFaction;
@@ -51,6 +54,10 @@ public partial class GameManager : Node2D
 		GD.Print(nodeFrom.Name, nodeFrom.CurrentFaction);
 		GD.Print(nodeTo.Name, nodeFrom.CurrentFaction);
     }
+	public bool LookForNeighbor(Array<GameNode> nodes, GameNode nodeToLookUp)
+	{
+		return nodes.ToList().Exists(node => node == nodeToLookUp);
+	}
     public override void _Process(double delta)
 	{
 		QueueRedraw();
@@ -104,7 +111,6 @@ public partial class GameManager : Node2D
 		playerDestinationNode = node;
 		node.sprite.SelfModulate = Color.Color8(0, 255, 0);
 		GD.Print("Added destination: "+node.Name);
-        _Draw();
 		EmitSignal("NodeSelected", playerOriginNode, node);
     }
 
@@ -145,15 +151,11 @@ public partial class GameManager : Node2D
 		return playerDestinationNode != null;
 	}
 
-	public bool HasNoDestination()
-	{
-		return playerDestinationNode == null;
-	}
-
 	public void CleanSelectedNodes()
 	{
 		if (playerOriginNode is not null) playerOriginNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		playerOriginNode = null;
+		if (playerDestinationNode is not null) playerDestinationNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		playerDestinationNode = null;
 	}
 
@@ -161,15 +163,15 @@ public partial class GameManager : Node2D
 	{
         playerOriginNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		GD.Print("Removed origin.");
-        EmitSignal("NodeUnselected",node, true);
 		playerOriginNode = null;
+        EmitSignal("NodeUnselected",node, true);
 	}
 
 	public void RemoveDestinationNode(GameNode node)
 	{
         playerDestinationNode.sprite.SelfModulate = Color.Color8(255, 255, 255);
 		GD.Print("Removed destination.");
-		EmitSignal("NodeUnselected", node, false);
         playerDestinationNode = null;
+		EmitSignal("NodeUnselected", node, false);
 	}
 }
