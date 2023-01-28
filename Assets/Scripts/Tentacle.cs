@@ -13,6 +13,8 @@ public class Tentacle : MonoBehaviour
 
     #region Exposed
 
+    public Cell Target { get; set; }
+
     public Transform Transform => _transform ? _transform : _transform = GetComponent<Transform>();
 
     #endregion
