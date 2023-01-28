@@ -26,7 +26,7 @@ public class Cell : MonoBehaviour
 
     private void Awake()
     {
-        
+        GenerateTentacles();
     }
 
     private void Update()
@@ -60,12 +60,15 @@ public class Cell : MonoBehaviour
         _corruptCell.SetActive(true);
     }
 
-    #endregion
-
-
-    #region Private and Protected
-
-
+    private void GenerateTentacles()
+    {
+        var neighbors = GetComponent<CellNeighborsChecker>().Neighbors;
+        foreach (var neighbor in neighbors)
+        {
+            var tentacle = Instantiate(_tentacleLongPrefab, transform);
+            tentacle.Transform.LookAt(neighbor.position);
+        }
+    }
 
     #endregion
 }

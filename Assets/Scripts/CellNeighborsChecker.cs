@@ -2,39 +2,24 @@ using UnityEngine;
 
 public class CellNeighborsChecker : MonoBehaviour
 {
-	#region Exposed
+    #region Exposed
 
-	[SerializeField]
-	private Transform[] _neighbors;
+    [field:SerializeField]
+    public Transform[] Neighbors { get; private set; }
 	
 	#endregion
 
 
 	#region Unity API
-	
-    private void Awake()
-    {
-        
-    }
 
     private void OnDrawGizmos()
     {
-        if (_neighbors.Length == 0) return;
+        for (int i = 0; i < Neighbors.Length; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, Neighbors[i].position);
+        }
     }
-
-    #endregion
-
-
-    #region Utils
-
-
-
-    #endregion
-
-
-    #region Private and Protected
-
-
 
     #endregion
 }
