@@ -21,6 +21,5 @@ public partial class TestCamera : Node2D
         {
             Input.MouseMode = Input.MouseModeEnum.Visible;
         }
-        GD.Print(Input.MouseMode);
     }
 }
