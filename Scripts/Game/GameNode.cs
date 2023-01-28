@@ -9,6 +9,7 @@ namespace Game;
 public partial class GameNode : Area2D
 {
     // Called when the node enters the scene tree for the first time.
+    public Array<GameNode> neighbors;
     [Export]
     public Array<NodePath> closeNeighborsNodes;
     [Export]
@@ -24,7 +25,10 @@ public partial class GameNode : Area2D
     public bool isHovered;
     [Export]
     public bool isMainNode;
+    [Export]
+    public TextureRect sprite;
     private double elapsedTime;
+    public bool canChargeUp;
 
     public override void _Ready()
     {
@@ -48,6 +52,18 @@ public partial class GameNode : Area2D
                 var node = GetNode<GameNode>(closeNeighborsNodes[i]);
                 DrawConnection(node);
             }
+        } else
+        {
+            for (int i = 0; i < farNeighborsNodes.Count; i++)
+            {
+                var node = GetNode<GameNode>(farNeighborsNodes[i]);
+                neighbors.Add(node);
+            }
+            for (int i = 0; i < closeNeighborsNodes.Count; i++)
+            {
+                var node = GetNode<GameNode>(closeNeighborsNodes[i]);
+                neighbors.Add(node);
+            }
         }
     }
     public override void _Process(double delta)
@@ -57,6 +73,8 @@ public partial class GameNode : Area2D
         
         } else
         {
+            if (currentFaction == Faction.Neutral) return;
+            if (!canChargeUp) return;
             elapsedTime += delta;
             if(elapsedTime >= 1 && currentPowerValue < GameManager.Instance.maxValueOnNodes)
             {
@@ -83,7 +101,7 @@ public partial class GameNode : Area2D
             if (!isHovered) return;
             if (GameManager.Instance.HasOriginSelected())
             {
-                if (GameManager.Instance.originNode == this)
+                if (GameManager.Instance.playerOriginNode == this)
                 {
                     GameManager.Instance.RemoveOriginNode(this);
                     //GameManager.Instance.CleanSelectedNodes();
@@ -91,7 +109,7 @@ public partial class GameNode : Area2D
                 }
                 if (GameManager.Instance.HasDestinationSelected())
                 {
-                    if (GameManager.Instance.destinationNode == this)
+                    if (GameManager.Instance.playerDestinationNode == this)
                     {
                         GameManager.Instance.RemoveDestinationNode(this);
                         //GameManager.Instance.CleanSelectedNodes();
@@ -115,6 +133,36 @@ public partial class GameNode : Area2D
     public void GeneratePowerValue()
     {
         currentPowerValue += chargeRate;
+        UpdateValueText(currentPowerValue);
+    }
+
+    public void IncreasePower()
+    {
+        currentPowerValue++;
+        UpdateValueText(currentPowerValue);
+    }
+
+    public void IncreasePower(int value)
+    {
+        currentPowerValue += value;
+        UpdateValueText(currentPowerValue);
+    }
+
+    public void DecreasePower() 
+    {
+        currentPowerValue--;
+        UpdateValueText(currentPowerValue);
+    }
+
+    public void DecreasePower(int value)
+    {
+        currentPowerValue -= value;
+        UpdateValueText(currentPowerValue);
+    }
+
+    public void SetPower(int value)
+    {
+        currentPowerValue = value;
         UpdateValueText(currentPowerValue);
     }
 

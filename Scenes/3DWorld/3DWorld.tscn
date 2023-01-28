@@ -5,10 +5,10 @@
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.84206)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8933, 4.84206)
 current = true
 
 [node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98256, 2.27006, 3.18323)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.98256, -1.26152, -0.645124)
 
 [node name="Tentacle_Medium" parent="." instance=ExtResource("2_0a2gg")]

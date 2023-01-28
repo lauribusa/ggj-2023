@@ -10,7 +10,7 @@ anchor_mode = 0
 current = true
 
 [node name="GameNode" parent="." instance=ExtResource("4_5icv5")]
-position = Vector2(141, 141)
+position = Vector2(184, 162)
 closeNeighborsNodes = [NodePath("../GameNode2")]
 currentPowerValue = 20
 chargeRate = 1
