@@ -11,6 +11,7 @@ public class GameNodeUI : MonoBehaviour
     public Cell cell;
     public TextMeshProUGUI valueText;
     public Button interactable;
+    public Image cursor;
     public List<GameNodeUI> closeNeighbors;
     public List<GameNodeUI> farNeighbors;
     
@@ -94,6 +95,16 @@ public class GameNodeUI : MonoBehaviour
     public void DecreasePower() 
     { 
     
+    }
+
+    public void SetSelected()
+    {
+        cursor.gameObject.SetActive(true);
+    }
+
+    public void UnsetSelected()
+    {
+        cursor.gameObject.SetActive(false);
     }
 
     public void ChangeFactionColor()
