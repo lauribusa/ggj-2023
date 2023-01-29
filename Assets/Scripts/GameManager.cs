@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent<GameNodeUI, Faction> factionChangedEvent;
 
+    [Tooltip("Passes true in param if the player wins")]
+    public UnityEvent<bool> gameEndEvent;
+
     public GameNodeUI playerSelectedOrigin;
     public GameNodeUI playerSelectedDestination;
 
@@ -40,6 +43,12 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Passive charge interval in seconds")]
     public float passiveChargeInterval;
+    [Tooltip("Speed of draining/Empowering nodes in seconds")]
+    public float processingRate;
+    #endregion
+
+    #region Private
+    private float _elapsedTime;
     #endregion
 
     #region Unity API
@@ -50,6 +59,7 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Already found instance of GameManager in scene; destroying.");
             DestroyImmediate(gameObject);
         }
+        factionChangedEvent.AddListener(OnNodeFactionChange);
     }
     private void Start()
     {
@@ -59,10 +69,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (existingLinks.Count > 0)
-        {
-
-        }
     }
 
     #endregion
@@ -75,10 +81,7 @@ public class GameManager : MonoBehaviour
         existingNodes.Add(gameNodeUI);
     }
 
-    public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
-    {
-
-    }
+   
     public void CheckIfNodeIsAlreadySelected(GameNodeUI node)
     {
         if (playerSelectedOrigin == node)
@@ -106,6 +109,23 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
     {
+        if(node.isFactionMainNode)
+        {
+            switch (node.CurrentFaction)
+            {
+                case Faction.Neutral:
+                    break;
+                case Faction.ImmuneSystem:
+                    gameEndEvent?.Invoke(true);
+                    break;
+                case Faction.Parasite:
+                    gameEndEvent?.Invoke(false);
+                    break;
+                default:
+                    break;
+            }
+            return;
+        }
         node.CurrentFaction = newFaction;
     }
 
@@ -123,12 +143,25 @@ public class GameManager : MonoBehaviour
         playerSelectedDestination = null;
     }
 
-    public IEnumerator OnLinkExists(GameNodeUI from, GameNodeUI to)
+    public IEnumerator OnLinkExists(NodeLink link)
     {
-        while (from.NodeValue >= 0 && to.NodeValue < globalMaxCharge)
+        while (link.from.NodeValue >= 0 && link.to.NodeValue < globalMaxCharge)
         {
-            yield return new WaitForSeconds(1f);
+            link.Process();
+            yield return new WaitForSeconds(processingRate);
         }
+        link.DestroyLink();
+    }
+
+    public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
+    {
+
+    }
+    public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
+    {
+        var nodeLink = new NodeLink(from, to);
+        existingLinks.Add(nodeLink);
+        StartCoroutine(OnLinkExists(nodeLink));
     }
 
     #endregion
