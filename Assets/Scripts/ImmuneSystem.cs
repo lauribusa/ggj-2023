@@ -62,6 +62,7 @@ public class ImmuneSystem : MonoBehaviour
     {
         var friendlyNode = node.neighbors.First(x => x.CurrentFaction == Faction.ImmuneSystem);
         Debug.Log($"Immune System is attempting a move on node {node} ({node.CurrentFaction} : {node.NodeValue}) from {friendlyNode} ({node.CurrentFaction} : ({node.NodeValue})");
+        GameManager.Instance.linkCreatedEvent?.Invoke(friendlyNode, node);
     }
 
     public void AddNodeToCapturedList(GameNodeUI node)
