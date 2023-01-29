@@ -180,8 +180,8 @@ public class GameManager : MonoBehaviour
         if (hasGameEnded) return;
         hasGameEnded = true;
         RemoveAllListenersFromEvents();
-        winScreen = GameObject.FindGameObjectWithTag("WinScreen");
-        loseScreen = GameObject.FindGameObjectWithTag("LoseScreen");
+        winScreen = GameObject.FindWithTag("WinScreen");
+        loseScreen = GameObject.FindWithTag("LoseScreen");
         winScreen.SetActive(hasPlayerWon);
         loseScreen.SetActive(!hasPlayerWon);
         Debug.Log($"Game ended. Player win? {hasPlayerWon}");
