@@ -1,16 +1,8 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 public class Tentacle : MonoBehaviour
 {
-    #region Events
-
-    public UnityEvent<bool> TargetReached;
-
-    #endregion
-
-
     #region Exposed
 
     public GameNodeUI Target { get; set; }
@@ -49,7 +41,6 @@ public class Tentacle : MonoBehaviour
     private void OnTargetReached()
     {
         Debug.Log("target reached");
-        TargetReached?.Invoke(_hasReach);
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
     }
 
