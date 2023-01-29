@@ -28,6 +28,7 @@ public class ImmuneSystem : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance == null) return;
         if (GameManager.Instance.hasGameEnded) return;
         _timeElapsed += Time.deltaTime;
         if (_timeElapsed > timeBeforeAction)
