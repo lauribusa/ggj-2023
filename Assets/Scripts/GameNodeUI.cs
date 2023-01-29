@@ -17,7 +17,25 @@ public class GameNodeUI : MonoBehaviour
     public Faction CurrentFaction
     {
         get { return _currentFaction; }
-        set { _currentFaction = value; }
+        set
+        { 
+            _currentFaction = value;
+
+            switch (_currentFaction)
+            {
+                case Faction.Neutral:
+                    cell.SetNeutral();
+                    break;
+
+                case Faction.ImmuneSystem:
+                    cell.SetImmune();
+                    break;
+
+                case Faction.Parasite:
+                    cell.SetCorrupt();
+                    break;
+            }
+        }
     }
     [HideInInspector] public List<GameNodeUI> neighbors = new List<GameNodeUI>();
     
