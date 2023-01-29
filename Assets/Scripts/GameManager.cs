@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         factionChangedEvent?.AddListener(OnNodeFactionChange);
         gameEndEvent?.AddListener(OnGameEnded);
         linkCreatedEvent?.AddListener(OnLinkCreated);
-        linkDestroyedEvent?.RemoveListener(OnLinkDestroyed);
+        linkDestroyedEvent?.AddListener(OnLinkDestroyed);
         NodeClickedEvent?.AddListener(OnNodeClicked);
         NodeSelectedEvent?.AddListener(OnNodeSelected);
         NodeUnselectedEvent?.AddListener(OnNodeUnselected);

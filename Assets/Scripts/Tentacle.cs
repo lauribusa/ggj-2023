@@ -64,7 +64,7 @@ public class Tentacle : MonoBehaviour
     private void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
         if (from != GameNode && to != Target) return;
-
+        if(to.CurrentFaction == Faction.Parasite) return;
         Retract();
     }
 
