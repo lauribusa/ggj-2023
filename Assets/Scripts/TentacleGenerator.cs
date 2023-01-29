@@ -18,6 +18,13 @@ public class TentacleGenerator : MonoBehaviour
     #endregion
 
 
+    #region Properties
+
+    public GameNodeUI GameNode => _gameNode;
+
+    #endregion
+
+
     #region Unity API
 
     private void Awake()
@@ -38,6 +45,8 @@ public class TentacleGenerator : MonoBehaviour
         {
             var tentacle = Instantiate(_tentacleMediumPrefab, Transform);
             tentacle.Transform.LookAt(neighbor.cell.transform.position);
+            tentacle.GameNode = GameNode;
+            tentacle.Target = neighbor;
         }
     }
 
@@ -48,6 +57,8 @@ public class TentacleGenerator : MonoBehaviour
         {
             var tentacle = Instantiate(_tentacleLongPrefab, Transform);
             tentacle.Transform.LookAt(neighbor.cell.transform.position);
+            tentacle.GameNode = GameNode;
+            tentacle.Target = neighbor;
         }
     }
 
