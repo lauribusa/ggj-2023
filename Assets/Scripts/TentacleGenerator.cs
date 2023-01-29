@@ -37,16 +37,21 @@ public class TentacleGenerator : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Transform gameNodeTransform = _gameNode.transform;
+        const float radius = 0.2f;
 
         for (int i = 0; i < _gameNode.closeNeighbors.Count; i++)
         {
-            Gizmos.DrawLine(gameNodeTransform.position, _gameNode.closeNeighbors[i].transform.position);
+            Vector3 neighborPosition = _gameNode.closeNeighbors[i].transform.position;
+            Gizmos.DrawLine(gameNodeTransform.position, neighborPosition);
+            Gizmos.DrawSphere(Vector3.Lerp(gameNodeTransform.position, neighborPosition, 0.1f), radius);
         }
 
         Gizmos.color = Color.yellow;
         for (int i = 0; i < _gameNode.farNeighbors.Count; i++)
         {
-            Gizmos.DrawLine(gameNodeTransform.position, _gameNode.farNeighbors[i].transform.position);
+            Vector3 neighborPosition = _gameNode.farNeighbors[i].transform.position;
+            Gizmos.DrawLine(gameNodeTransform.position, neighborPosition);
+            Gizmos.DrawSphere(Vector3.Lerp(gameNodeTransform.position, neighborPosition, 0.1f), radius);
         }
     }
 
