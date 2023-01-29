@@ -59,7 +59,14 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Already found instance of GameManager in scene; destroying.");
             DestroyImmediate(gameObject);
         }
-        factionChangedEvent.AddListener(OnNodeFactionChange);
+        factionChangedEvent?.AddListener(OnNodeFactionChange);
+        gameEndEvent?.AddListener(OnGameEnded);
+        linkCreatedEvent?.AddListener(OnLinkCreated);
+        linkDestroyedEvent?.RemoveListener(OnLinkDestroyed);
+        NodeClickedEvent?.AddListener(OnNodeClicked);
+        NodeSelectedEvent?.AddListener(OnNodeSelected);
+        NodeUnselectedEvent?.AddListener(OnNodeUnselected);
+
     }
     private void Start()
     {
@@ -95,8 +102,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnGameEnded(bool hasPlayerWon)
+    {
+        Debug.Log($"Game ended. Player win? {hasPlayerWon}");
+    }
+
     public void OnNodeClicked(GameNodeUI node)
     {
+        Debug.Log($"Node clicked: {node}");
         if (playerSelectedOrigin is null)
         {
             playerSelectedOrigin = node;
@@ -105,6 +118,16 @@ public class GameManager : MonoBehaviour
         {
             playerSelectedDestination = node;
         }
+    }
+
+    public void OnNodeUnselected(GameNodeUI node)
+    {
+        Debug.Log($"Node unselected: {node}");
+    }
+
+    public void OnNodeSelected(GameNodeUI node)
+    {
+        Debug.Log($"Node selected: {node}");
     }
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
