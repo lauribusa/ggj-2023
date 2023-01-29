@@ -47,6 +47,11 @@ public class Tentacle : MonoBehaviour
         Deployed?.Invoke(false);
     }
 
+    private void OnTargetReach()
+    {
+        Debug.Log("reached");
+    }
+
     private void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
         if (to != Target) return;
