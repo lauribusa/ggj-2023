@@ -165,9 +165,9 @@ public class GameNodeUI : MonoBehaviour
         switch (CurrentFaction)
         {
             case Faction.Neutral:
-                interactable.image.color = Color.black;
-                valueText.color = Color.black;
-                modifierText.color = Color.black;
+                interactable.image.color = Color.white;
+                valueText.color = Color.white;
+                modifierText.color = Color.white;
                 if(cell != null)
                 {
                     cell.SetNeutral();
