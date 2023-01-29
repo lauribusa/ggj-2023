@@ -22,8 +22,15 @@ public class NodeLink
         this.to = to;
         fromInitialValue = from.NodeValue;
         toInitialValue = to.NodeValue;
-        from.chargeRate--;
-        to.chargeRate++;
+        if(from.CurrentFaction == to.CurrentFaction) 
+        { 
+            from.chargeRate--;
+            to.chargeRate++;
+        } else
+        {
+            from.chargeRate--;
+            to.chargeRate--;
+        }
         from.isLinked = true;
         to.isLinked = true;
     }
@@ -32,8 +39,6 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
-        from.chargeRate++;
-        to.chargeRate--;
         from.bonusCharge = 0;
         to.bonusCharge = 0;
         GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
@@ -70,11 +75,11 @@ public class NodeLink
         //to.ChargeUp();
         if (to.NodeValue > GameManager.Instance.lowChargeThreshold1)
         {
-            from.bonusCharge = 2;
+            from.bonusCharge = -2;
         }
         if (to.NodeValue > GameManager.Instance.highChargeThreshold2)
         {
-            from.bonusCharge = 1;
+            from.bonusCharge = -1;
         }
         to.bonusCharge = 0;
         if (to.NodeValue <= 0)

@@ -182,9 +182,11 @@ public class GameManager : MonoBehaviour
             case Faction.ImmuneSystem:
                 ImmuneSystem.Instance.AddNodeToCapturedList(node);
                 node.chargeRate = 1;
+                node.bonusCharge = 0;
                 break;
             default:
                 node.chargeRate = 1;
+                node.bonusCharge = 0;
                 break;
         }
         node.CurrentFaction = newFaction;
@@ -211,6 +213,17 @@ public class GameManager : MonoBehaviour
 
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
+        if (from.CurrentFaction == to.CurrentFaction)
+        {
+
+            from.chargeRate++;
+            to.chargeRate--;
+        }
+        else
+        {
+            from.chargeRate++;
+            to.chargeRate++;
+        }
         Debug.Log($"Link destroyed: from: {from}, to: {to}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
