@@ -230,6 +230,10 @@ public class GameManager : MonoBehaviour
         {
             ImmuneSystem.Instance.RemoveNodeFromCapturedList(node);
         }
+        if(node == playerSelectedOrigin)
+        {
+            playerSelectedOrigin = null;
+        }
         node.CurrentFaction = newFaction;
         if (newFaction == Faction.ImmuneSystem) ImmuneSystem.Instance.AddNodeToCapturedList(node);
 
