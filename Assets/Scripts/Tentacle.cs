@@ -27,6 +27,7 @@ public class Tentacle : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         GameManager.Instance.linkCreatedEvent.AddListener(OnLinkCreated);
+        GameManager.Instance.linkDestroyedEvent.AddListener(OnLinkDestroyed);
     }
 
     #endregion
@@ -53,6 +54,13 @@ public class Tentacle : MonoBehaviour
         if (GameNode.CurrentFaction != Faction.Parasite) return;
 
         Deploy();
+    }
+
+    private void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
+    {
+        if (from != GameNode && to != Target) return;
+
+        Retract();
     }
 
     #endregion
