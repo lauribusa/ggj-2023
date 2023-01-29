@@ -39,8 +39,6 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
-        from.chargeModifier = 0;
-        to.chargeModifier = 0;
         GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
         GameManager.Instance.existingLinks.Remove(this);
     }
@@ -56,39 +54,56 @@ public class NodeLink
 
     public void DrainPower(GameNodeUI from, GameNodeUI to)
     {
-        //from.ChargeUp();
+        // trouver une façon de mettre les bonus sans que ca sois casse couille;
 
-        if (to.NodeValue < GameManager.Instance.lowChargeThreshold1)
-        {
-            from.chargeModifier = -2;
-            to.chargeModifier = 2;
-        }
-        if (to.NodeValue < GameManager.Instance.highChargeThreshold2)
-        {
-            from.chargeModifier = -1;
-            to.chargeModifier = 1;
-        }
-        from.chargeModifier = 0;
-        to.chargeModifier = 0;
+        /* if (to.NodeValue < GameManager.Instance.lowChargeThreshold1)
+         {
+             from.chargeModifier = -2;
+             to.chargeModifier = -2;
+         } else
+         if (to.NodeValue < GameManager.Instance.highChargeThreshold2 && to.NodeValue > GameManager.Instance.lowChargeThreshold1)
+         {
+             from.chargeModifier = -2;
+             to.chargeModifier = -2;
+         } else
+         {
+             from.chargeModifier = -1;
+             to.chargeModifier = -1;
+         }*/
 
         if (from.NodeValue <= 0)
         {
             FromNodeIsDepleted();
+            from.chargeModifier++;
+            to.chargeModifier--;
         }
         
         if (to.NodeValue <= 0)
         {
             ToNodeIsDepleted();
+            from.chargeModifier++;
+            to.chargeModifier--;
         }
     }
 
 
     public void GivePower(GameNodeUI from, GameNodeUI to)
     {
-        //from.ChargeUp();
-        //to.ChargeUp();
+        // trouver une façon de mettre les bonus sans que ca sois casse couille;
+        /*if (to.NodeValue < GameManager.Instance.highChargeThreshold2)
+        {
+            from.chargeModifier += -2;
+            to.chargeModifier += 2;
+        }
+        else
+        {
+            from.chargeModifier = -1;
+            to.chargeModifier = 1;
+        }*/
         if (from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge)
         {
+            from.chargeModifier++;
+            to.chargeModifier++;
             DestroyLink();
             return;
         }

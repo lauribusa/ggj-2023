@@ -54,6 +54,10 @@ public class Tentacle : MonoBehaviour
             Debug.Log($"Link already exists or is not valid.");
             return;
         }
+        if (GameManager.Instance.playerSelectedOrigin != null && node.CurrentFaction != Faction.Parasite)
+        {
+            GameManager.Instance.playerSelectedOrigin = null;
+        }
         Deploy();
     }
 

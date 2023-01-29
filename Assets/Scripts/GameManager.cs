@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         }
         set
         {
-            if(_playerSelectedOrigin != null)
+            if (_playerSelectedOrigin != null)
             {
                 _playerSelectedOrigin.UnsetSelected();
             }
@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour
 
     public int globalDrainRate;
     public int globalChargeRate;
-    public int globalMaxCharge = 60;
+    public int globalMaxCharge = 100;
     public int lowChargeThreshold1 = 30;
-    public int highChargeThreshold2 = 30;
+    public int highChargeThreshold2 = 50;
 
     [Tooltip("Passive charge interval in seconds")]
     public float passiveChargeInterval;
@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 
     #region Private
     private float _elapsedTime;
-    private List<Coroutine> activeLinks = new List<Coroutine>();
     #endregion
 
     #region Unity API
@@ -97,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         if (!existingLinks.Any())
         {
-            if(_elapsedTime != 0) _elapsedTime = 0;
+            if (_elapsedTime != 0) _elapsedTime = 0;
             return;
         }
         _elapsedTime += Time.deltaTime;
@@ -119,7 +118,7 @@ public class GameManager : MonoBehaviour
         existingNodes.Add(gameNodeUI);
     }
 
-   
+
     public void CheckIfNodeIsAlreadySelected(GameNodeUI node)
     {
         if (playerSelectedOrigin == node)
@@ -156,17 +155,10 @@ public class GameManager : MonoBehaviour
             return;
         }
         var linkExists = CheckIfLinkAlreadyExists(playerSelectedOrigin, node);
-        if(linkExists) 
+        if (linkExists)
         {
             Debug.Log($"Link already exists");
         }
-        if (playerSelectedOrigin is not null && node.CurrentFaction != Faction.Parasite)
-        {
-            playerSelectedOrigin = null;
-        }
-
-        //linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
-
     }
 
     public bool CheckIfLinkAlreadyExists(GameNodeUI from, GameNodeUI to)
@@ -189,13 +181,13 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
     {
-        if(node.CurrentFaction == Faction.ImmuneSystem)
+        if (node.CurrentFaction == Faction.ImmuneSystem)
         {
             ImmuneSystem.Instance.RemoveNodeFromCapturedList(node);
         }
         node.CurrentFaction = newFaction;
-        if(newFaction == Faction.ImmuneSystem) ImmuneSystem.Instance.AddNodeToCapturedList(node);
-        
+        if (newFaction == Faction.ImmuneSystem) ImmuneSystem.Instance.AddNodeToCapturedList(node);
+
         if (node.isFactionMainNode)
         {
             node.isFactionMainNode = false;
@@ -204,7 +196,7 @@ public class GameManager : MonoBehaviour
         {
             gameEndEvent?.Invoke(true);
         }
-        if(!existingNodes.Any(x => x.CurrentFaction == Faction.Parasite))
+        if (!existingNodes.Any(x => x.CurrentFaction == Faction.Parasite))
         {
             gameEndEvent?.Invoke(false);
         }
@@ -220,18 +212,18 @@ public class GameManager : MonoBehaviour
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
         Debug.Log($"Link being destroyed: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
-/*
-        if (from.CurrentFaction == to.CurrentFaction)
-        {
-            from.chargeRate++;
-            to.chargeRate--;
-        }
-        else
-        {
-            from.chargeRate++;
-            to.chargeRate++;
-            to.chargeRate++;
-        }*/
+        /*
+                if (from.CurrentFaction == to.CurrentFaction)
+                {
+                    from.chargeRate++;
+                    to.chargeRate--;
+                }
+                else
+                {
+                    from.chargeRate++;
+                    to.chargeRate++;
+                    to.chargeRate++;
+                }*/
         from.chargeModifier = 0;
         to.chargeModifier = 0;
         Debug.Log($"Link destroyed: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
@@ -239,7 +231,7 @@ public class GameManager : MonoBehaviour
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
         Debug.Log($"Link created: from: {from}, to: {to}");
-        
+
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
     }
