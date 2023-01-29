@@ -33,6 +33,23 @@ public class TentacleGenerator : MonoBehaviour
         GenerateLongTentacles();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Transform gameNodeTransform = _gameNode.transform;
+
+        for (int i = 0; i < _gameNode.closeNeighbors.Count; i++)
+        {
+            Gizmos.DrawLine(gameNodeTransform.position, _gameNode.closeNeighbors[i].transform.position);
+        }
+
+        Gizmos.color = Color.yellow;
+        for (int i = 0; i < _gameNode.farNeighbors.Count; i++)
+        {
+            Gizmos.DrawLine(gameNodeTransform.position, _gameNode.farNeighbors[i].transform.position);
+        }
+    }
+
     #endregion
 
 

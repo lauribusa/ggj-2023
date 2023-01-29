@@ -48,7 +48,11 @@ public class Cell : MonoBehaviour
         normalizedValue *= _maxScale;
 
         float scale = Mathf.Clamp(normalizedValue, 1f, _maxScale);
-        Transform.localScale = new Vector3(scale, scale, scale);
+        var newScale = new Vector3(scale, scale, scale);
+
+        _neutralCell.transform.localScale = newScale;
+        _immuneCell.transform.localScale = newScale;
+        _corruptCell.transform.localScale = newScale;
     }
 
     #endregion
