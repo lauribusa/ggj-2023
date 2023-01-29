@@ -413,6 +413,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 428015042512026352, guid: 702db368e47aa91439fde3e58be8fc71, type: 3}
+      propertyPath: isFactionMainNode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 428015042512026352, guid: 702db368e47aa91439fde3e58be8fc71, type: 3}
       propertyPath: farNeighbors.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1045,7 +1049,9 @@ MonoBehaviour:
   factionChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  playerSelectedOrigin: {fileID: 0}
+  gameEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
   playerSelectedDestination: {fileID: 0}
   existingNodes: []
   globalDrainRate: 1
@@ -1054,6 +1060,7 @@ MonoBehaviour:
   lowChargeThreshold1: 30
   highChargeThreshold2: 30
   passiveChargeInterval: 1
+  processingRate: 0.5
 --- !u!4 &2010989827
 Transform:
   m_ObjectHideFlags: 0

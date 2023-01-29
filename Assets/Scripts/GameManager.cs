@@ -27,8 +27,26 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Passes true in param if the player wins")]
     public UnityEvent<bool> gameEndEvent;
-
-    public GameNodeUI playerSelectedOrigin;
+    private GameNodeUI _playerSelectedOrigin;
+    public GameNodeUI playerSelectedOrigin
+    {
+        get
+        {
+            return _playerSelectedOrigin;
+        }
+        set
+        {
+            if(_playerSelectedOrigin != null)
+            {
+                _playerSelectedOrigin.UnsetSelected();
+            }
+            if (value != null)
+            {
+                value.SetSelected();
+            }
+            _playerSelectedOrigin = value;
+        }
+    }
     public GameNodeUI playerSelectedDestination;
 
     public List<NodeLink> existingLinks = new List<NodeLink>();
@@ -49,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     #region Private
     private float _elapsedTime;
+    private List<Coroutine> activeLinks = new List<Coroutine>();
     #endregion
 
     #region Unity API
@@ -59,7 +78,14 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Already found instance of GameManager in scene; destroying.");
             DestroyImmediate(gameObject);
         }
-        factionChangedEvent.AddListener(OnNodeFactionChange);
+        factionChangedEvent?.AddListener(OnNodeFactionChange);
+        gameEndEvent?.AddListener(OnGameEnded);
+        linkCreatedEvent?.AddListener(OnLinkCreated);
+        linkDestroyedEvent?.RemoveListener(OnLinkDestroyed);
+        NodeClickedEvent?.AddListener(OnNodeClicked);
+        NodeSelectedEvent?.AddListener(OnNodeSelected);
+        NodeUnselectedEvent?.AddListener(OnNodeUnselected);
+
     }
     private void Start()
     {
@@ -69,6 +95,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!existingLinks.Any())
+        {
+            if(_elapsedTime != 0) _elapsedTime = 0;
+            return;
+        }
+        _elapsedTime += Time.deltaTime;
+        if (_elapsedTime < processingRate) return;
+        _elapsedTime = 0;
+        for (int i = 0; i < existingLinks.Count; i++)
+        {
+            existingLinks[i].Process();
+        }
     }
 
     #endregion
@@ -95,16 +133,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnGameEnded(bool hasPlayerWon)
+    {
+        Debug.Log($"Game ended. Player win? {hasPlayerWon}");
+    }
+
     public void OnNodeClicked(GameNodeUI node)
     {
+        Debug.Log($"Node clicked: {node}");
         if (playerSelectedOrigin is null)
         {
+            if (node.CurrentFaction != Faction.Parasite) return;
+            Debug.Log($"Has been added to origin");
             playerSelectedOrigin = node;
+            return;
         }
-        if (playerSelectedDestination is null)
+        if (!playerSelectedOrigin.neighbors.Contains(node))
         {
-            playerSelectedDestination = node;
+            Debug.Log($"Is not a valid neighbor.");
+            return;
         }
+        linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
+        
+    }
+
+    public void OnNodeUnselected(GameNodeUI node)
+    {
+        Debug.Log($"Node unselected: {node}");
+    }
+
+    public void OnNodeSelected(GameNodeUI node)
+    {
+        Debug.Log($"Node selected: {node}");
     }
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
@@ -124,6 +184,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
+            node.CurrentFaction = newFaction;
             return;
         }
         node.CurrentFaction = newFaction;
@@ -143,25 +204,16 @@ public class GameManager : MonoBehaviour
         playerSelectedDestination = null;
     }
 
-    public IEnumerator OnLinkExists(NodeLink link)
-    {
-        while (link.from.NodeValue >= 0 && link.to.NodeValue < globalMaxCharge)
-        {
-            link.Process();
-            yield return new WaitForSeconds(processingRate);
-        }
-        link.DestroyLink();
-    }
-
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
-
+        Debug.Log($"Link destroyed: from: {from}, to: {to}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
+        Debug.Log($"Link created: from: {from}, to: {to}");
+        playerSelectedOrigin = null;
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
-        StartCoroutine(OnLinkExists(nodeLink));
     }
 
     #endregion

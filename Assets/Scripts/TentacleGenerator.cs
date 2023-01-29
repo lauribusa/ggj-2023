@@ -43,7 +43,7 @@ public class TentacleGenerator : MonoBehaviour
         var neighbors = _gameNode.closeNeighbors;
         foreach (var neighbor in neighbors)
         {
-            var tentacle = Instantiate(_tentacleMediumPrefab, Transform);
+            var tentacle = Instantiate(_tentacleMediumPrefab, Transform.position, Quaternion.identity);
             tentacle.Transform.LookAt(neighbor.cell.transform.position);
             tentacle.GameNode = GameNode;
             tentacle.Target = neighbor;
@@ -55,7 +55,7 @@ public class TentacleGenerator : MonoBehaviour
         var neighbors = _gameNode.farNeighbors;
         foreach (var neighbor in neighbors)
         {
-            var tentacle = Instantiate(_tentacleLongPrefab, Transform);
+            var tentacle = Instantiate(_tentacleLongPrefab, Transform.position, Quaternion.identity);
             tentacle.Transform.LookAt(neighbor.cell.transform.position);
             tentacle.GameNode = GameNode;
             tentacle.Target = neighbor;

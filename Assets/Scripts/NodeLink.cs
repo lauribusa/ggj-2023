@@ -76,6 +76,7 @@ public class NodeLink
             default:
                 break;
         }
+        DestroyLink();
     }
 
     public void ToNodeIsDepleted()
@@ -94,7 +95,7 @@ public class NodeLink
             default:
                 break;
         }
-        
+        DestroyLink();
     }
 }
 

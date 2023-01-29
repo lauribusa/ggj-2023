@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef63314d9973af74cbeb4974bc92430a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameNode: {fileID: 8719130274786632302}
   _neutralCell: {fileID: 2175795873123007365}
   _immuneCell: {fileID: 6560704013757466977}
   _corruptCell: {fileID: 8497084177036474953}
