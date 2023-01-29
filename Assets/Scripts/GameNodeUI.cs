@@ -113,7 +113,7 @@ public class GameNodeUI : MonoBehaviour
             if(_timeIdle > 5) 
             {
                 _timeIdle = 0;
-                chargeModifier = 2;
+                //chargeModifier = 2;
             }
         }
         PassiveCharge();
