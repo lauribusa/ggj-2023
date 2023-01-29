@@ -133,6 +133,7 @@ public class GameNodeUI : MonoBehaviour
             case Faction.Neutral:
                 interactable.image.color = Color.black;
                 valueText.color = Color.black;
+                modifierText.color = Color.black;
                 if(cell != null)
                 {
                     cell.SetNeutral();
@@ -141,6 +142,7 @@ public class GameNodeUI : MonoBehaviour
             case Faction.ImmuneSystem:
                 interactable.image.color = Color.blue;
                 valueText.color = Color.cyan;
+                modifierText.color = Color.cyan;
                 if (cell != null)
                 {
                     cell.SetImmune();
@@ -149,6 +151,7 @@ public class GameNodeUI : MonoBehaviour
             case Faction.Parasite:
                 interactable.image.color = Color.red;
                 valueText.color = Color.magenta;
+                modifierText.color = Color.magenta;
                 if (cell != null)
                 {
                     cell.SetCorrupt();
