@@ -53,7 +53,16 @@ public class Tentacle : MonoBehaviour
     {
         if (GameManager.Instance.playerSelectedOrigin != GameNode) return;
         if (node != Target) return;
-
+        var linkExists = GameManager.Instance.CheckIfLinkAlreadyExists(GameManager.Instance.playerSelectedOrigin, node);
+        if (linkExists)
+        {
+            Debug.Log($"Link already exists or is not valid.");
+            return;
+        }
+        if (GameManager.Instance.playerSelectedOrigin != null && node.CurrentFaction != Faction.Parasite)
+        {
+            GameManager.Instance.playerSelectedOrigin = null;
+        }
         Deploy();
     }
 

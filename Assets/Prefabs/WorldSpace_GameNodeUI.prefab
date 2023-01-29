@@ -84,7 +84,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8196828939579635608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8704827930740167844, guid: 702db368e47aa91439fde3e58be8fc71, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 185
       objectReference: {fileID: 0}
     - target: {fileID: 8704827930740167844, guid: 702db368e47aa91439fde3e58be8fc71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
