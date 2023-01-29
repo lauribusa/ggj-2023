@@ -17,24 +17,10 @@ public class GameNodeUI : MonoBehaviour
     public Faction CurrentFaction
     {
         get { return _currentFaction; }
-        set
-        { 
+        set 
+        {
             _currentFaction = value;
-
-            switch (_currentFaction)
-            {
-                case Faction.Neutral:
-                    cell.SetNeutral();
-                    break;
-
-                case Faction.ImmuneSystem:
-                    cell.SetImmune();
-                    break;
-
-                case Faction.Parasite:
-                    cell.SetCorrupt();
-                    break;
-            }
+            ChangeFactionColor();
         }
     }
     [HideInInspector] public List<GameNodeUI> neighbors = new List<GameNodeUI>();
@@ -79,6 +65,7 @@ public class GameNodeUI : MonoBehaviour
         neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         GameManager.Instance.AddToNodeList(this);
         NodeValueDisplayUpdate(nodeValue);
+        ChangeFactionColor();
     }
 
     private void OnDrawGizmosSelected()
@@ -107,6 +94,40 @@ public class GameNodeUI : MonoBehaviour
     public void DecreasePower() 
     { 
     
+    }
+
+    public void ChangeFactionColor()
+    {
+        switch (CurrentFaction)
+        {
+            case Faction.Neutral:
+                interactable.image.color = Color.black;
+                valueText.color = Color.black;
+                if(cell != null)
+                {
+                    cell.SetNeutral();
+                }
+                break;
+            case Faction.ImmuneSystem:
+                interactable.image.color = Color.blue;
+                valueText.color = Color.cyan;
+                if (cell != null)
+                {
+                    cell.SetImmune();
+                }
+                break;
+            case Faction.Parasite:
+                interactable.image.color = Color.red;
+                valueText.color = Color.magenta;
+                if (cell != null)
+                {
+                    cell.SetCorrupt();
+                }
+                break;
+            default:
+                break;
+        }
+       
     }
     public void PassiveCharge()
     {

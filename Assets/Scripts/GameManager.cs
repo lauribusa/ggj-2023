@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
     {
         existingNodes.Add(gameNodeUI);
     }
+
+    public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
+    {
+
+    }
     public void CheckIfNodeIsAlreadySelected(GameNodeUI node)
     {
         if (playerSelectedOrigin == node)
