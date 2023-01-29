@@ -35,16 +35,21 @@ public class Tentacle : MonoBehaviour
     {
         _animator.SetBool(CAN_DEPLOY, true);
         Deployed?.Invoke();
+        _isDeploying = true;
     }
 
     public void Retract()
     {
         _animator.SetBool(CAN_DEPLOY, false);
         Retracted?.Invoke();
+        _isDeploying = false;
     }
 
     private void OnTargetReached()
     {
+        if (!_isDeploying) return;
+
+        Debug.Log($"{name}: target reached");
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
         Reached?.Invoke();
     }
@@ -69,7 +74,7 @@ public class Tentacle : MonoBehaviour
     private void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
         if (from != GameNode && to != Target) return;
-        if(to.CurrentFaction == Faction.Parasite) return;
+        if (to.CurrentFaction == Faction.Parasite) return;
 
         Retract();
     }
@@ -83,6 +88,7 @@ public class Tentacle : MonoBehaviour
 
     private Animator _animator;
     private Transform _transform;
+    private bool _isDeploying;
 
     #endregion
 }
