@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4044efe663e836949b2c66f271269527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loseScreen: {fileID: 0}
+  winScreen: {fileID: 0}
   NodeSelectedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -74,6 +76,7 @@ MonoBehaviour:
   highChargeThreshold2: 30
   passiveChargeInterval: 1
   processingRate: 0.5
+  hasGameEnded: 0
 --- !u!114 &1555264000565950942
 MonoBehaviour:
   m_ObjectHideFlags: 0
