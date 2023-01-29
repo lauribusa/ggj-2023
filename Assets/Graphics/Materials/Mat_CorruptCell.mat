@@ -112,7 +112,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Density: 3.35
+    - _Density: 0.9
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -123,7 +123,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _OndulationSpeed: 1.27
+    - _OndulationSpeed: 0.81
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
