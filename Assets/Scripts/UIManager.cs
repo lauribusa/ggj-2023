@@ -41,7 +41,9 @@ public class UIManager : MonoBehaviour
 
     public void ToCredits()
     {
-        SceneManager.LoadScene(2);
+        GameManager instance = FindObjectOfType<GameManager>();
+        if(instance != null) Destroy(instance);
+        SceneManager.LoadScene(6);
     }
 
     public void QuitGame()
@@ -51,7 +53,22 @@ public class UIManager : MonoBehaviour
 
     public void ToSecondLevel()
     {
-        Debug.Log($"Add level index");
+        SceneManager.LoadScene(2);
+    }
+
+    public void ToThirdLevel()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void ToFourthLevel()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void ToFifthLevel()
+    {
+        SceneManager.LoadScene(5);
     }
     #endregion
 
