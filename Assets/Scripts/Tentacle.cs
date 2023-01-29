@@ -47,24 +47,44 @@ public class Tentacle : MonoBehaviour
 
     private void OnTargetReached()
     {
-        if (!_isDeploying) return;
 
+        if (!_isDeploying) 
+        {
+            Debug.Log("Is already deploying");
+            return;
+        
+        }
+        if (GameNode.CurrentFaction != Faction.Parasite) return;
         Debug.Log($"{name}: target reached");
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
         Reached?.Invoke();
     }
 
-    private void OnNodeClicked(GameNodeUI node)
+    private void OnNodeClicked(GameNodeUI targetNode)
     {
-        if (GameManager.Instance.playerSelectedOrigin != GameNode) return;
-        if (node != Target) return;
-        var linkExists = GameManager.Instance.CheckIfLinkAlreadyExists(GameManager.Instance.playerSelectedOrigin, node);
+        Debug.Log($"Node clicked (tentacle) {targetNode.CurrentFaction} {targetNode.gameObject.name}");
+        if(targetNode == GameNode)
+        {
+            Debug.Log("Cannot click self.");
+            return;
+        }
+        if (GameManager.Instance.playerSelectedOrigin != GameNode)
+        {
+            Debug.Log($"Origin is not GameNode");
+            return;
+        }
+        if (targetNode != Target) 
+        {
+            Debug.Log($"node is not a target");
+            return;
+        }
+        var linkExists = GameManager.Instance.CheckIfLinkAlreadyExists(GameManager.Instance.playerSelectedOrigin, targetNode);
         if (linkExists)
         {
             Debug.Log($"Link already exists or is not valid.");
             return;
         }
-        if (GameManager.Instance.playerSelectedOrigin != null && node.CurrentFaction != Faction.Parasite)
+        if (GameManager.Instance.playerSelectedOrigin != null)
         {
             GameManager.Instance.playerSelectedOrigin = null;
         }
