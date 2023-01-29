@@ -48,6 +48,11 @@ public class UIManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ToSecondLevel()
+    {
+        Debug.Log($"Add level index");
+    }
     #endregion
 
 

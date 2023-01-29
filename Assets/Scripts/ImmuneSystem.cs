@@ -17,14 +17,18 @@ public class ImmuneSystem : MonoBehaviour
 
 
     #region Unity API
-
-    private void Start()
+    private void Awake()
     {
-
+        if (FindObjectsOfType(typeof(ImmuneSystem)).Length > 1)
+        {
+            Debug.LogWarning("Already found instance of ImmuneSystem in scene; destroying.");
+            DestroyImmediate(gameObject);
+        }
     }
 
     private void Update()
     {
+        if (GameManager.Instance.hasGameEnded) return;
         _timeElapsed += Time.deltaTime;
         if (_timeElapsed > timeBeforeAction)
         {
@@ -41,6 +45,11 @@ public class ImmuneSystem : MonoBehaviour
     {
         _controlledNodes = nodes;
     }
+
+    public void FlushNodes()
+    {
+        _controlledNodes.Clear();
+    }
     public void LookForWeakestNeighbor()
     {
         HashSet<GameNodeUI> allNeighbors = new HashSet<GameNodeUI>();
@@ -54,6 +63,7 @@ public class ImmuneSystem : MonoBehaviour
                 }
             });
         });
+        Debug.Log(allNeighbors.Count);
         var weakestNeighbor = allNeighbors.OrderBy(x => x.NodeValue).FirstOrDefault();
         AttackNode(weakestNeighbor);
     }

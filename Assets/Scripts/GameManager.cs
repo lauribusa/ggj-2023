@@ -16,6 +16,9 @@ public class LinkEvent : UnityEvent<GameNodeUI, GameNodeUI> { }
 public class GameManager : MonoBehaviour
 {
     #region Exposed
+    public GameObject loseScreen;
+    public GameObject winScreen;
+
     public UnityEvent<GameNodeUI> NodeSelectedEvent;
     public UnityEvent<GameNodeUI> NodeUnselectedEvent;
     public UnityEvent<GameNodeUI> NodeClickedEvent;
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent<GameNodeUI, GameNodeUI> linkDestroyedEvent;
 
     public UnityEvent<GameNodeUI, Faction> factionChangedEvent;
+
 
     [Tooltip("Passes true in param if the player wins")]
     public UnityEvent<bool> gameEndEvent;
@@ -63,6 +67,7 @@ public class GameManager : MonoBehaviour
     public float passiveChargeInterval;
     [Tooltip("Speed of draining/Empowering nodes in seconds")]
     public float processingRate;
+    public bool hasGameEnded = false;
     #endregion
 
     #region Private
@@ -77,23 +82,17 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Already found instance of GameManager in scene; destroying.");
             DestroyImmediate(gameObject);
         }
-        factionChangedEvent?.AddListener(OnNodeFactionChange);
-        gameEndEvent?.AddListener(OnGameEnded);
-        linkCreatedEvent?.AddListener(OnLinkCreated);
-        linkDestroyedEvent?.AddListener(OnLinkDestroyed);
-        NodeClickedEvent?.AddListener(OnNodeClicked);
-        NodeSelectedEvent?.AddListener(OnNodeSelected);
-        NodeUnselectedEvent?.AddListener(OnNodeUnselected);
+        
 
     }
     private void Start()
     {
-        var AInodes = existingNodes.Where(x => x.CurrentFaction == Faction.ImmuneSystem).ToList();
-        ImmuneSystem.Instance.SetStartNodes(AInodes);
+        StartNewGame();
     }
 
     private void Update()
     {
+        if (hasGameEnded) return;
         if (!existingLinks.Any())
         {
             if (_elapsedTime != 0) _elapsedTime = 0;
@@ -118,6 +117,19 @@ public class GameManager : MonoBehaviour
         existingNodes.Add(gameNodeUI);
     }
 
+    public void StartNewGame()
+    {
+        hasGameEnded = false;
+        var AInodes = existingNodes.Where(x => x.CurrentFaction == Faction.ImmuneSystem).ToList();
+        ImmuneSystem.Instance.SetStartNodes(AInodes);
+        LookForStateScreens();
+        AddAllListeners();
+    }
+    public void LookForStateScreens()
+    {
+        if(winScreen == null) winScreen = GameObject.FindWithTag("WinScreen");
+        if(loseScreen == null) loseScreen = GameObject.FindWithTag("LoseScreen");
+    }
 
     public void CheckIfNodeIsAlreadySelected(GameNodeUI node)
     {
@@ -131,9 +143,41 @@ public class GameManager : MonoBehaviour
             Debug.Log("Already a destination.");
         }
     }
+    private void RemoveAllListenersFromEvents()
+    {
+        factionChangedEvent?.RemoveAllListeners();
+        gameEndEvent?.RemoveAllListeners();
+        linkCreatedEvent?.RemoveAllListeners();
+        linkDestroyedEvent?.RemoveAllListeners();
+        NodeClickedEvent?.RemoveAllListeners();
+        NodeSelectedEvent?.RemoveAllListeners();
+        NodeUnselectedEvent?.RemoveAllListeners();
+    }
+
+    private void AddAllListeners()
+    {
+        factionChangedEvent?.AddListener(OnNodeFactionChange);
+        gameEndEvent?.AddListener(OnGameEnded);
+        linkCreatedEvent?.AddListener(OnLinkCreated);
+        linkDestroyedEvent?.AddListener(OnLinkDestroyed);
+        NodeClickedEvent?.AddListener(OnNodeClicked);
+        NodeSelectedEvent?.AddListener(OnNodeSelected);
+        NodeUnselectedEvent?.AddListener(OnNodeUnselected);
+    }
+
+    public void FlushLists()
+    {
+        existingLinks.Clear();
+        existingNodes.Clear();
+    }
 
     public void OnGameEnded(bool hasPlayerWon)
     {
+        if (hasGameEnded) return;
+        hasGameEnded = true;
+        RemoveAllListenersFromEvents();
+        winScreen.SetActive(hasPlayerWon);
+        loseScreen.SetActive(!hasPlayerWon);
         Debug.Log($"Game ended. Player win? {hasPlayerWon}");
     }
 

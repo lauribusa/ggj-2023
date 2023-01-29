@@ -75,17 +75,21 @@ public class GameNodeUI : MonoBehaviour
     [SerializeField]
     private int nodeValue;
 
-    
 
-	#endregion
 
-	
-	#region Unity API
-	
+    #endregion
+
+
+    #region Unity API
     private void Awake()
     {
-        neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         GameManager.Instance.AddToNodeList(this);
+    }
+
+
+    private void Start()
+    {
+        neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         NodeValueDisplayUpdate(nodeValue);
         ChangeFactionColor();
         UpdateBaseChargeRate();
