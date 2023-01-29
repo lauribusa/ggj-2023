@@ -1,9 +1,11 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Cell : MonoBehaviour
 {
     #region Exposed
+
+    [SerializeField]
+    private float _maxScale = 3f;
 
     [SerializeField]
     private GameNodeUI _gameNode;
@@ -41,16 +43,12 @@ public class Cell : MonoBehaviour
 
     private void Grow()
     {
-        float maxNodeValue = 100f;
-        float maxScale = 3f;
+        float maxNodeValue = GameManager.Instance.globalMaxCharge;
+        float normalizedValue = _gameNode.NodeValue / maxNodeValue;
+        normalizedValue *= _maxScale;
 
-        float value = _gameNode.NodeValue / maxNodeValue;
-        value *= maxScale;
-
-        float scale = Mathf.Clamp(value, 1f, maxScale);
-
-        var newScale = new Vector3(scale, scale, scale);
-        Transform.localScale = newScale;
+        float scale = Mathf.Clamp(normalizedValue, 1f, _maxScale);
+        Transform.localScale = new Vector3(scale, scale, scale);
     }
 
     #endregion
