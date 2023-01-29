@@ -218,6 +218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinLoseCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8853735321490391940, guid: b58aabc440a48704eb90f06c7b48b2a1, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToThirdLevel
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b58aabc440a48704eb90f06c7b48b2a1, type: 3}
 --- !u!1 &246639607
