@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,8 @@ public class NodeLink
         this.to = to;
         fromInitialValue = from.NodeValue;
         toInitialValue = to.NodeValue;
+        from.chargeRate--;
+        to.chargeRate++;
         from.isLinked = true;
         to.isLinked = true;
     }
@@ -29,12 +32,16 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
+        from.chargeRate++;
+        to.chargeRate--;
+        from.bonusCharge = 0;
+        to.bonusCharge = 0;
         GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
         GameManager.Instance.existingLinks.Remove(this);
     }
     public void Process()
     {
-        if(from.CurrentFaction == to.CurrentFaction) 
+        if (from.CurrentFaction == to.CurrentFaction)
         {
             GivePower(from, to);
             return;
@@ -44,13 +51,33 @@ public class NodeLink
 
     public void DrainPower(GameNodeUI from, GameNodeUI to)
     {
-        from.NodeValue -= GameManager.Instance.globalDrainRate;
-        if(from.NodeValue <= 0 )
+        //from.ChargeUp();
+
+        if (from.NodeValue > GameManager.Instance.lowChargeThreshold1)
+        {
+            from.bonusCharge = 2;
+        }
+        if (from.NodeValue > GameManager.Instance.highChargeThreshold2)
+        {
+            from.bonusCharge = 1;
+        }
+        from.bonusCharge = 0;
+
+        if (from.NodeValue <= 0)
         {
             FromNodeIsDepleted();
         }
-        to.NodeValue -= GameManager.Instance.globalDrainRate;
-        if(to.NodeValue <= 0)
+        //to.ChargeUp();
+        if (to.NodeValue > GameManager.Instance.lowChargeThreshold1)
+        {
+            from.bonusCharge = 2;
+        }
+        if (to.NodeValue > GameManager.Instance.highChargeThreshold2)
+        {
+            from.bonusCharge = 1;
+        }
+        to.bonusCharge = 0;
+        if (to.NodeValue <= 0)
         {
             ToNodeIsDepleted();
         }
@@ -59,13 +86,13 @@ public class NodeLink
 
     public void GivePower(GameNodeUI from, GameNodeUI to)
     {
-        if(from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge) 
+        //from.ChargeUp();
+        //to.ChargeUp();
+        if (from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge)
         {
             DestroyLink();
             return;
         }
-        from.NodeValue -= GameManager.Instance.globalDrainRate;
-        to.NodeValue += GameManager.Instance.globalDrainRate;
     }
 
     public void FromNodeIsDepleted()

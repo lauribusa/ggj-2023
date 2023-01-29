@@ -42,6 +42,7 @@ public class GameNodeUI : MonoBehaviour
     public int chargeRate;
     public bool isFactionMainNode;
     [HideInInspector]
+    public int bonusCharge;
     public bool isLinked;
     #endregion
 
@@ -67,6 +68,8 @@ public class GameNodeUI : MonoBehaviour
         GameManager.Instance.AddToNodeList(this);
         NodeValueDisplayUpdate(nodeValue);
         ChangeFactionColor();
+        if(!isFactionMainNode) chargeRate = GameManager.Instance.globalChargeRate;
+        if (CurrentFaction == Faction.Neutral) chargeRate = 0;
     }
 
     private void OnDrawGizmosSelected()
@@ -88,13 +91,10 @@ public class GameNodeUI : MonoBehaviour
     
 
     #region Main
-    public void IncreasePower()
+
+    public void ChargeUp()
     {
         nodeValue += chargeRate;
-    }
-    public void DecreasePower() 
-    { 
-    
     }
 
     public void SetSelected()
@@ -151,7 +151,8 @@ public class GameNodeUI : MonoBehaviour
         if (_timeElapsed > GameManager.Instance.passiveChargeInterval)
         {
             _timeElapsed = 0;
-            NodeValue = NodeValue + GameManager.Instance.globalChargeRate;
+            
+            NodeValue = NodeValue + chargeRate + bonusCharge;
         }
     }
 

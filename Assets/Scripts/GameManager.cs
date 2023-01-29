@@ -169,25 +169,37 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
     {
-        if(node.isFactionMainNode)
+        if(node.CurrentFaction == Faction.ImmuneSystem)
         {
-            switch (node.CurrentFaction)
-            {
-                case Faction.Neutral:
-                    break;
-                case Faction.ImmuneSystem:
-                    gameEndEvent?.Invoke(true);
-                    break;
-                case Faction.Parasite:
-                    gameEndEvent?.Invoke(false);
-                    break;
-                default:
-                    break;
-            }
-            node.CurrentFaction = newFaction;
-            return;
+            ImmuneSystem.Instance.RemoveNodeFromCapturedList(node);
+        }
+        switch (newFaction)
+        {
+            case Faction.Neutral:
+                node.chargeRate = 0;
+                break;
+            case Faction.ImmuneSystem:
+                ImmuneSystem.Instance.AddNodeToCapturedList(node);
+                node.chargeRate = 1;
+                break;
+            default:
+                node.chargeRate = 1;
+                break;
         }
         node.CurrentFaction = newFaction;
+        if (node.isFactionMainNode)
+        {
+            node.isFactionMainNode = false;
+        }
+        if (!existingNodes.Any(x => x.CurrentFaction == Faction.ImmuneSystem))
+        {
+            gameEndEvent?.Invoke(true);
+        }
+        if(!existingNodes.Any(x => x.CurrentFaction == Faction.Parasite))
+        {
+            gameEndEvent?.Invoke(false);
+        }
+
     }
 
     public void CheckIfLinkIsFormed()
