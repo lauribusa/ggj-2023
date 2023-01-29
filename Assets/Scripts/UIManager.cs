@@ -38,6 +38,16 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+
+    public void ToCredits()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     #endregion
 
 

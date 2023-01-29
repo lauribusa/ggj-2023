@@ -142,6 +142,7 @@ public class GameNodeUI : MonoBehaviour
     }
     public void PassiveCharge()
     {
+        Debug.Log($"Node Info Charge: faction: {CurrentFaction} value: {NodeValue} charge: {chargeRate} + {bonusCharge}");
         if (CurrentFaction == Faction.Neutral) return;
         if(NodeValue >= GameManager.Instance.globalMaxCharge)
         {
