@@ -75,17 +75,21 @@ public class GameNodeUI : MonoBehaviour
     [SerializeField]
     private int nodeValue;
 
-    
 
-	#endregion
 
-	
-	#region Unity API
-	
+    #endregion
+
+
+    #region Unity API
     private void Awake()
     {
-        neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         GameManager.Instance.AddToNodeList(this);
+    }
+
+
+    private void Start()
+    {
+        neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         NodeValueDisplayUpdate(nodeValue);
         ChangeFactionColor();
         UpdateBaseChargeRate();
@@ -112,7 +116,20 @@ public class GameNodeUI : MonoBehaviour
 
     public void ChargeUp()
     {
-        NodeValue += baseCharge + chargeModifier;
+        int bonus = 0;
+        if(NodeValue < GameManager.Instance.highChargeThreshold2)
+        {
+            bonus = 1;
+        }
+        if(NodeValue < GameManager.Instance.lowChargeThreshold1)
+        {
+            bonus = 2;
+        }
+        if(CurrentFaction == Faction.Neutral || isFactionMainNode)
+        {
+            bonus = 0;
+        }
+        NodeValue += baseCharge + chargeModifier + bonus;
     }
 
     public void SetSelected()
