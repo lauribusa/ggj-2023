@@ -54,21 +54,28 @@ public class UIManager : MonoBehaviour
     public void ToSecondLevel()
     {
         SceneManager.LoadScene(2);
+        GameManager.Instance.StartNewGame();
     }
 
     public void ToThirdLevel()
     {
         SceneManager.LoadScene(3);
+        GameManager.Instance.StartNewGame();
+
     }
 
     public void ToFourthLevel()
     {
         SceneManager.LoadScene(4);
+        GameManager.Instance.StartNewGame();
+
     }
 
     public void ToFifthLevel()
     {
         SceneManager.LoadScene(5);
+        GameManager.Instance.StartNewGame();
+
     }
     #endregion
 
