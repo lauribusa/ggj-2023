@@ -24,13 +24,12 @@ public class NodeLink
         toInitialValue = to.NodeValue;
         if(from.CurrentFaction == to.CurrentFaction) 
         { 
-            from.chargeRate--;
-            to.chargeRate++;
+            from.chargeModifier--;
+            to.chargeModifier++;
         } else
         {
-            from.chargeRate--;
-            to.chargeRate--;
-            to.chargeRate--;
+            from.chargeModifier--;
+            to.chargeModifier--;
         }
         from.isLinked = true;
         to.isLinked = true;
@@ -40,8 +39,8 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
-        from.bonusCharge = 0;
-        to.bonusCharge = 0;
+        from.chargeModifier = 0;
+        to.chargeModifier = 0;
         GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
         GameManager.Instance.existingLinks.Remove(this);
     }
@@ -61,16 +60,16 @@ public class NodeLink
 
         if (to.NodeValue < GameManager.Instance.lowChargeThreshold1)
         {
-            from.bonusCharge = -2;
-            to.bonusCharge = 2;
+            from.chargeModifier = -2;
+            to.chargeModifier = 2;
         }
         if (to.NodeValue < GameManager.Instance.highChargeThreshold2)
         {
-            from.bonusCharge = -1;
-            to.bonusCharge = 1;
+            from.chargeModifier = -1;
+            to.chargeModifier = 1;
         }
-        from.bonusCharge = 0;
-        to.bonusCharge = 0;
+        from.chargeModifier = 0;
+        to.chargeModifier = 0;
 
         if (from.NodeValue <= 0)
         {

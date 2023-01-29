@@ -141,6 +141,7 @@ public class GameManager : MonoBehaviour
     public void OnNodeClicked(GameNodeUI node)
     {
         Debug.Log($"Node clicked: {node}");
+
         if (playerSelectedOrigin is null)
         {
             if (node.CurrentFaction != Faction.Parasite) return;
@@ -154,8 +155,26 @@ public class GameManager : MonoBehaviour
             playerSelectedOrigin = null;
             return;
         }
+        var linkExists = CheckIfLinkAlreadyExists(playerSelectedOrigin, node);
+        if(linkExists) 
+        {
+            Debug.Log($"Link already exists");
+        }
+        if (playerSelectedOrigin is not null && node.CurrentFaction != Faction.Parasite)
+        {
+            playerSelectedOrigin = null;
+        }
+
         //linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
-        
+
+    }
+
+    public bool CheckIfLinkAlreadyExists(GameNodeUI from, GameNodeUI to)
+    {
+        if (from == null || to == null) return true;
+        var fromTo = existingLinks.Any(link => link.from == from && link.to == to);
+        var toFrom = existingLinks.Any(link => link.to == from && link.from == to);
+        return toFrom || fromTo;
     }
 
     public void OnNodeUnselected(GameNodeUI node)
@@ -174,22 +193,9 @@ public class GameManager : MonoBehaviour
         {
             ImmuneSystem.Instance.RemoveNodeFromCapturedList(node);
         }
-        switch (newFaction)
-        {
-            case Faction.Neutral:
-                node.chargeRate = 0;
-                break;
-            case Faction.ImmuneSystem:
-                ImmuneSystem.Instance.AddNodeToCapturedList(node);
-                node.chargeRate = 1;
-                node.bonusCharge = 0;
-                break;
-            default:
-                node.chargeRate = 1;
-                node.bonusCharge = 0;
-                break;
-        }
         node.CurrentFaction = newFaction;
+        if(newFaction == Faction.ImmuneSystem) ImmuneSystem.Instance.AddNodeToCapturedList(node);
+        
         if (node.isFactionMainNode)
         {
             node.isFactionMainNode = false;
@@ -213,8 +219,8 @@ public class GameManager : MonoBehaviour
 
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
-        Debug.Log($"Link being destroyed: from: {from} ({from.CurrentFaction} : {from.chargeRate} + {from.bonusCharge}, to: {to} {to.CurrentFaction} {to.chargeRate} + {to.bonusCharge}");
-
+        Debug.Log($"Link being destroyed: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
+/*
         if (from.CurrentFaction == to.CurrentFaction)
         {
             from.chargeRate++;
@@ -225,18 +231,15 @@ public class GameManager : MonoBehaviour
             from.chargeRate++;
             to.chargeRate++;
             to.chargeRate++;
-        }
-        from.bonusCharge = 0;
-        to.bonusCharge = 0;
-        Debug.Log($"Link destroyed: from: {from} ({from.CurrentFaction} : {from.chargeRate} + {from.bonusCharge}, to: {to} {to.CurrentFaction} {to.chargeRate} + {to.bonusCharge}");
+        }*/
+        from.chargeModifier = 0;
+        to.chargeModifier = 0;
+        Debug.Log($"Link destroyed: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
         Debug.Log($"Link created: from: {from}, to: {to}");
-        if(from.CurrentFaction == Faction.Parasite)
-        {
-            playerSelectedOrigin = null;
-        }
+        
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
     }

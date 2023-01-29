@@ -23,6 +23,7 @@ public class GameNodeUI : MonoBehaviour
         {
             _currentFaction = value;
             ChangeFactionColor();
+            UpdateBaseChargeRate();
         }
     }
     [HideInInspector] public List<GameNodeUI> neighbors = new List<GameNodeUI>();
@@ -41,25 +42,25 @@ public class GameNodeUI : MonoBehaviour
     }
     [Header("Node values")]
     private int _chargeRate;
-    public int chargeRate
+    public int baseCharge
     {
         get { return _chargeRate; }
         set
         {
             _chargeRate = value;
-            modifierText.text = $"{_chargeRate} + {bonusCharge}";
+            modifierText.text = $"{_chargeRate+chargeModifier}";
         }
     }
     public bool isFactionMainNode;
     [HideInInspector]
-    private int _bonusCharge;
-    public int bonusCharge
+    private int _chargeModifier;
+    public int chargeModifier
     {
-        get { return _bonusCharge; }
+        get { return _chargeModifier; }
         set
         {
-            _bonusCharge = value;
-            modifierText.text = $"{_chargeRate} + {bonusCharge}";
+            _chargeModifier = value;
+            modifierText.text = $"{_chargeRate+chargeModifier}";
         }
     }
     public bool isLinked;
@@ -87,8 +88,7 @@ public class GameNodeUI : MonoBehaviour
         GameManager.Instance.AddToNodeList(this);
         NodeValueDisplayUpdate(nodeValue);
         ChangeFactionColor();
-        if(!isFactionMainNode) chargeRate = GameManager.Instance.globalChargeRate;
-        if (CurrentFaction == Faction.Neutral) chargeRate = 0;
+        UpdateBaseChargeRate();
     }
 
     private void OnDrawGizmosSelected()
@@ -101,7 +101,6 @@ public class GameNodeUI : MonoBehaviour
 
     public void Update()
     {
-        if (isLinked) return;
         _timeElapsed += Time.deltaTime;
         PassiveCharge();
     }
@@ -113,7 +112,7 @@ public class GameNodeUI : MonoBehaviour
 
     public void ChargeUp()
     {
-        nodeValue += chargeRate;
+        NodeValue += baseCharge + chargeModifier;
     }
 
     public void SetSelected()
@@ -124,6 +123,24 @@ public class GameNodeUI : MonoBehaviour
     public void UnsetSelected()
     {
         cursor.gameObject.SetActive(false);
+    }
+
+    public void UpdateBaseChargeRate()
+    {
+        switch (CurrentFaction)
+        {
+            case Faction.Neutral:
+                baseCharge = 0;
+                break;
+            case Faction.ImmuneSystem:
+                baseCharge = GameManager.Instance.globalChargeRate;
+                break;
+            case Faction.Parasite:
+                baseCharge = GameManager.Instance.globalChargeRate;
+                break;
+            default:
+                break;
+        }
     }
 
     public void ChangeFactionColor()
@@ -166,17 +183,18 @@ public class GameNodeUI : MonoBehaviour
     {
         //Debug.Log($"Node Info Charge: faction: {CurrentFaction} value: {NodeValue} charge: {chargeRate} + {bonusCharge}");
         //if (CurrentFaction == Faction.Neutral) return;
-        if(NodeValue >= GameManager.Instance.globalMaxCharge)
+        if (_timeElapsed < GameManager.Instance.passiveChargeInterval) return;
+        _timeElapsed = 0;
+        ChargeUp();
+        if (NodeValue >= GameManager.Instance.globalMaxCharge)
         {
             NodeValue = GameManager.Instance.globalMaxCharge;
-            return;
         }
-        if (_timeElapsed > GameManager.Instance.passiveChargeInterval)
+        if (NodeValue < 0)
         {
-            _timeElapsed = 0;
-            
-            NodeValue = NodeValue + chargeRate + bonusCharge;
+            NodeValue = 0;
         }
+
     }
 
     public void NodeValueDisplayUpdate(int value)

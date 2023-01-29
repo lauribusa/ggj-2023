@@ -323,6 +323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CellFull
       objectReference: {fileID: 0}
+    - target: {fileID: 6864023102976766879, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8497084177036474953, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: m_IsActive
       value: 1

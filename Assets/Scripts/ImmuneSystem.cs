@@ -54,13 +54,22 @@ public class ImmuneSystem : MonoBehaviour
                 }
             });
         });
-        var weakestNeighbor = allNeighbors.OrderBy(x => x.NodeValue).First();
+        var weakestNeighbor = allNeighbors.OrderBy(x => x.NodeValue).FirstOrDefault();
         AttackNode(weakestNeighbor);
     }
 
     public void AttackNode(GameNodeUI node)
     {
-        var friendlyNode = node.neighbors.First(x => x.CurrentFaction == Faction.ImmuneSystem);
+        if(node is null)
+        {
+            Debug.Log($"AI found no valid neighbor");
+        }
+        var friendlyNode = node.neighbors.FirstOrDefault(x => x.CurrentFaction == Faction.ImmuneSystem);
+        if(friendlyNode is null)
+        {
+            Debug.Log($"No valid friendly node found");
+            return;
+        }
         Debug.Log($"Immune System is attempting a move on node {node} ({node.CurrentFaction} : {node.NodeValue}) from {friendlyNode} ({node.CurrentFaction} : ({node.NodeValue})");
         GameManager.Instance.linkCreatedEvent?.Invoke(friendlyNode, node);
     }
