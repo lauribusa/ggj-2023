@@ -224,7 +224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -349,7 +349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -583,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 100
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: chargeRate
@@ -751,7 +751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -951,6 +951,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 305626033868737594, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 305626033868737594, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 305626033868737594, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 2283896171635546974, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -1053,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 30
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: _currentFaction
@@ -1190,7 +1202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -1547,7 +1559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -1684,7 +1696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 30
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: _currentFaction
@@ -2289,7 +2301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -2429,7 +2441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: _currentFaction
@@ -2577,7 +2589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 30
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: _currentFaction
@@ -3049,7 +3061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -3308,7 +3320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
@@ -3488,7 +3500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: nodeValue
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
