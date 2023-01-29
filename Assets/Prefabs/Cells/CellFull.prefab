@@ -215,9 +215,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2283896171635546974}
     m_Modifications:
+    - target: {fileID: 3333275650171571005, guid: 256b16f36f7648d41a260dfcbe26e983, type: 3}
+      propertyPath: cell
+      value: 
+      objectReference: {fileID: 6790569022738746843}
     - target: {fileID: 8196828939579635609, guid: 256b16f36f7648d41a260dfcbe26e983, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8196828939579635610, guid: 256b16f36f7648d41a260dfcbe26e983, type: 3}
+      propertyPath: m_Camera
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8196828939579635610, guid: 256b16f36f7648d41a260dfcbe26e983, type: 3}
       propertyPath: m_RenderMode
