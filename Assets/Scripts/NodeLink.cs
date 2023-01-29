@@ -97,8 +97,6 @@ public class NodeLink
             ToNodeIsDepleted();
         }
     }
-
-
     public void GivePower(GameNodeUI from, GameNodeUI to)
     {
         if (from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge)
