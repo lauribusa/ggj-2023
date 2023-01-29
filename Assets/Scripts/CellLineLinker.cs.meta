@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0624a35e33aba684aab24d0a83c33f35
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _gameNode: {instanceID: 0}
+  - _veinPathPrefab: {fileID: 2795333802675733489, guid: 25b69f5eb4bf3694fb63bd04ed8b6189, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
