@@ -8,6 +8,13 @@ public class NodeLink
     public GameNodeUI to;
     private int toInitialValue;
 
+    //TODO
+    // Faire en sorte que les nodes ne font pas juste dépenser leur points mais avoir un débit constant qui se dépense dans les liens.
+    // node principale as + de débit?
+
+    //TODO 2
+    // condition de victoire: itérer les nodes et vérifier si une node appartiens encore a une faction
+
     public NodeLink(GameNodeUI from, GameNodeUI to)
     {
         this.from = from;
@@ -43,7 +50,7 @@ public class NodeLink
             FromNodeIsDepleted();
         }
         to.NodeValue -= GameManager.Instance.globalDrainRate;
-        if(from.NodeValue <= 0)
+        if(to.NodeValue <= 0)
         {
             ToNodeIsDepleted();
         }
@@ -52,9 +59,9 @@ public class NodeLink
 
     public void GivePower(GameNodeUI from, GameNodeUI to)
     {
-        if(from.NodeValue > (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge) 
+        if(from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge) 
         {
-            GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
+            DestroyLink();
             return;
         }
         from.NodeValue -= GameManager.Instance.globalDrainRate;
