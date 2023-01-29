@@ -31,7 +31,7 @@ public class CellLineLinker : MonoBehaviour
         {
             var lineRenderer = Instantiate(_veinPathPrefab, transform.position, Quaternion.identity);
 
-            Vector3 cellPosition = transform.position;
+            Vector3 cellPosition = GetRandom(transform.position);
             cellPosition.y += Y_OFFSET;
             lineRenderer.SetPosition(0, cellPosition);
 
@@ -44,7 +44,7 @@ public class CellLineLinker : MonoBehaviour
         {
             var lineRenderer = Instantiate(_veinPathPrefab, transform.position, Quaternion.identity);
 
-            Vector3 cellPosition = transform.position;
+            Vector3 cellPosition = GetRandom(transform.position);
             cellPosition.y += Y_OFFSET;
             lineRenderer.SetPosition(0, cellPosition);
 
@@ -54,12 +54,23 @@ public class CellLineLinker : MonoBehaviour
         }
     }
 
+    private Vector3 GetRandom(Vector3 position)
+    {
+        position.x += GetRandomFloat();
+        position.y += GetRandomFloat();
+        position.z += GetRandomFloat();
+        return position;
+    }
+
+    private float GetRandomFloat() => Random.RandomRange(-RANDOM_FLOAT, RANDOM_FLOAT);
+
     #endregion
 
 
     #region Private and Protected
 
-    private const float Y_OFFSET = 0.5f;
+    private const float RANDOM_FLOAT = 0.5f;
+    private const float Y_OFFSET = 0.3f;
 
     #endregion
 }
