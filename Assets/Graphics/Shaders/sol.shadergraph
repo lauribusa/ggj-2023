@@ -627,7 +627,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Saturation",
     "m_StageCapability": 3,
-    "m_Value": 0.75,
+    "m_Value": 0.6000000238418579,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
