@@ -71,6 +71,7 @@ public class GameNodeUI : MonoBehaviour
     [SerializeField]
     private Faction _currentFaction;
     private float _timeElapsed;
+    private float _timeIdle;
 
     [SerializeField]
     private int nodeValue;
@@ -106,6 +107,15 @@ public class GameNodeUI : MonoBehaviour
     public void Update()
     {
         _timeElapsed += Time.deltaTime;
+        if (NodeValue <= 0)
+        {
+            _timeIdle += Time.deltaTime;
+            if(_timeIdle > 5) 
+            {
+                _timeIdle = 0;
+                chargeModifier = 2;
+            }
+        }
         PassiveCharge();
     }
     
