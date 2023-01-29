@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,6 +34,7 @@ public class Tentacle : MonoBehaviour
 
     public void Deploy()
     {
+        GameManager.Instance.playerSelectedOrigin = null;
         _animator.SetBool(CAN_DEPLOY, true);
         Deployed?.Invoke();
         _isDeploying = true;
@@ -62,6 +64,21 @@ public class Tentacle : MonoBehaviour
 
     private void OnNodeClicked(GameNodeUI targetNode)
     {
+        Debug.Log($"Node clicked: {targetNode}");
+
+        if (!GameManager.Instance.playerSelectedOrigin)
+        {
+            if (targetNode.CurrentFaction != Faction.Parasite) return;
+            Debug.Log($"Has been added to origin");
+            GameManager.Instance.playerSelectedOrigin = targetNode;
+            return;
+        }
+/*        if (!GameManager.Instance.playerSelectedOrigin.neighbors.Contains(targetNode))
+        {
+            Debug.Log($"Is not a valid neighbor.");
+            GameManager.Instance.playerSelectedOrigin = null;
+            return;
+        }*/
         Debug.Log($"Node clicked (tentacle) {targetNode.CurrentFaction} {targetNode.gameObject.name}");
         if(targetNode == GameNode)
         {
@@ -81,12 +98,8 @@ public class Tentacle : MonoBehaviour
         var linkExists = GameManager.Instance.CheckIfLinkAlreadyExists(GameManager.Instance.playerSelectedOrigin, targetNode);
         if (linkExists)
         {
-            Debug.Log($"Link already exists or is not valid.");
+            Debug.Log($"Link already exists.");
             return;
-        }
-        if (GameManager.Instance.playerSelectedOrigin != null)
-        {
-            GameManager.Instance.playerSelectedOrigin = null;
         }
         Deploy();
     }

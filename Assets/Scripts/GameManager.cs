@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeClicked(GameNodeUI node)
     {
-        Debug.Log($"Node clicked: {node}");
+        /*Debug.Log($"Node clicked: {node}");
 
         if (playerSelectedOrigin is null)
         {
@@ -203,11 +203,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Link already exists");
         }
+
+        node.tentacle.Deploy();*/
     }
 
     public bool CheckIfLinkAlreadyExists(GameNodeUI from, GameNodeUI to)
     {
-        if (from == null || to == null) return true;
         var fromTo = existingLinks.Any(link => link.from == from && link.to == to);
         var toFrom = existingLinks.Any(link => link.to == from && link.from == to);
         return toFrom || fromTo;
