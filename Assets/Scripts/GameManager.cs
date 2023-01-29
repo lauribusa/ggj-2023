@@ -151,9 +151,10 @@ public class GameManager : MonoBehaviour
         if (!playerSelectedOrigin.neighbors.Contains(node))
         {
             Debug.Log($"Is not a valid neighbor.");
+            playerSelectedOrigin = null;
             return;
         }
-        linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
+        //linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
         
     }
 

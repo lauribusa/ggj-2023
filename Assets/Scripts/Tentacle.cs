@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,10 +14,9 @@ public class Tentacle : MonoBehaviour
     #region Exposed
 
     public GameNodeUI Target { get; set; }
-
+    public GameNodeUI GameNode { get; set; }
     public Transform Transform => _transform ? _transform : _transform = GetComponent<Transform>();
 
-    public GameNodeUI GameNode { get; set; }
     #endregion
 
 
@@ -27,8 +25,8 @@ public class Tentacle : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        GameManager.Instance.linkCreatedEvent.AddListener(OnLinkCreated);
         GameManager.Instance.linkDestroyedEvent.AddListener(OnLinkDestroyed);
+        GameManager.Instance.NodeClickedEvent.AddListener(OnNodeClicked);
     }
 
     #endregion
@@ -50,15 +48,15 @@ public class Tentacle : MonoBehaviour
 
     private void OnTargetReached()
     {
+        Debug.Log("target reached");
         TargetReached?.Invoke(_hasReach);
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
     }
 
-    private void OnLinkCreated(GameNodeUI from, GameNodeUI to)
+    private void OnNodeClicked(GameNodeUI node)
     {
-        if (to != Target) return;
-        if (from != GameNode) return;
-        if (GameNode.CurrentFaction != Faction.Parasite) return;
+        if (GameManager.Instance.playerSelectedOrigin != GameNode) return;
+        if (node != Target) return;
 
         Deploy();
     }
