@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TentacleGenerator : MonoBehaviour
@@ -13,14 +14,14 @@ public class TentacleGenerator : MonoBehaviour
     [SerializeField]
     private Tentacle _tentacleLongPrefab;
 
-    public Transform Transform => _transform ? _transform : _transform = GetComponent<Transform>();
-
     #endregion
 
 
     #region Properties
 
     public GameNodeUI GameNode => _gameNode;
+
+    public Transform Transform => _transform ? _transform : _transform = GetComponent<Transform>();
 
     #endregion
 
@@ -60,24 +61,15 @@ public class TentacleGenerator : MonoBehaviour
 
     #region Main
 
-    private void GenerateMediumTentacles()
-    {
-        var neighbors = _gameNode.closeNeighbors;
-        foreach (var neighbor in neighbors)
-        {
-            var tentacle = Instantiate(_tentacleMediumPrefab, Transform.position, Quaternion.identity);
-            tentacle.Transform.LookAt(neighbor.cell.transform.position);
-            tentacle.GameNode = GameNode;
-            tentacle.Target = neighbor;
-        }
-    }
+    private void GenerateMediumTentacles() => GenerateTentacles(_gameNode.closeNeighbors, _tentacleMediumPrefab);
 
-    private void GenerateLongTentacles()
+    private void GenerateLongTentacles() => GenerateTentacles(_gameNode.farNeighbors, _tentacleLongPrefab);
+
+    private void GenerateTentacles(List<GameNodeUI> neighbors, Tentacle tentaclePrefab)
     {
-        var neighbors = _gameNode.farNeighbors;
         foreach (var neighbor in neighbors)
         {
-            var tentacle = Instantiate(_tentacleLongPrefab, Transform.position, Quaternion.identity);
+            var tentacle = Instantiate(tentaclePrefab, Transform.position, Quaternion.identity);
             tentacle.Transform.LookAt(neighbor.cell.transform.position);
             tentacle.GameNode = GameNode;
             tentacle.Target = neighbor;
