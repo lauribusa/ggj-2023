@@ -213,9 +213,10 @@ public class GameManager : MonoBehaviour
 
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
+        Debug.Log($"Link being destroyed: from: {from} ({from.CurrentFaction} : {from.chargeRate} + {from.bonusCharge}, to: {to} {to.CurrentFaction} {to.chargeRate} + {to.bonusCharge}");
+
         if (from.CurrentFaction == to.CurrentFaction)
         {
-
             from.chargeRate++;
             to.chargeRate--;
         }
@@ -223,8 +224,11 @@ public class GameManager : MonoBehaviour
         {
             from.chargeRate++;
             to.chargeRate++;
+            to.chargeRate++;
         }
-        Debug.Log($"Link destroyed: from: {from}, to: {to}");
+        from.bonusCharge = 0;
+        to.bonusCharge = 0;
+        Debug.Log($"Link destroyed: from: {from} ({from.CurrentFaction} : {from.chargeRate} + {from.bonusCharge}, to: {to} {to.CurrentFaction} {to.chargeRate} + {to.bonusCharge}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {

@@ -30,6 +30,7 @@ public class NodeLink
         {
             from.chargeRate--;
             to.chargeRate--;
+            to.chargeRate--;
         }
         from.isLinked = true;
         to.isLinked = true;
@@ -58,30 +59,24 @@ public class NodeLink
     {
         //from.ChargeUp();
 
-        if (from.NodeValue > GameManager.Instance.lowChargeThreshold1)
+        if (to.NodeValue < GameManager.Instance.lowChargeThreshold1)
         {
-            from.bonusCharge = 2;
+            from.bonusCharge = -2;
+            to.bonusCharge = 2;
         }
-        if (from.NodeValue > GameManager.Instance.highChargeThreshold2)
+        if (to.NodeValue < GameManager.Instance.highChargeThreshold2)
         {
-            from.bonusCharge = 1;
+            from.bonusCharge = -1;
+            to.bonusCharge = 1;
         }
         from.bonusCharge = 0;
+        to.bonusCharge = 0;
 
         if (from.NodeValue <= 0)
         {
             FromNodeIsDepleted();
         }
-        //to.ChargeUp();
-        if (to.NodeValue > GameManager.Instance.lowChargeThreshold1)
-        {
-            from.bonusCharge = -2;
-        }
-        if (to.NodeValue > GameManager.Instance.highChargeThreshold2)
-        {
-            from.bonusCharge = -1;
-        }
-        to.bonusCharge = 0;
+        
         if (to.NodeValue <= 0)
         {
             ToNodeIsDepleted();

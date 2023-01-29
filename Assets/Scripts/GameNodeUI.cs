@@ -10,6 +10,7 @@ public class GameNodeUI : MonoBehaviour
     #region Exposed
     public Cell cell;
     public TextMeshProUGUI valueText;
+    public TextMeshProUGUI modifierText;
     public Button interactable;
     public Image cursor;
     public List<GameNodeUI> closeNeighbors;
@@ -39,10 +40,28 @@ public class GameNodeUI : MonoBehaviour
         }
     }
     [Header("Node values")]
-    public int chargeRate;
+    private int _chargeRate;
+    public int chargeRate
+    {
+        get { return _chargeRate; }
+        set
+        {
+            _chargeRate = value;
+            modifierText.text = $"{_chargeRate} + {bonusCharge}";
+        }
+    }
     public bool isFactionMainNode;
     [HideInInspector]
-    public int bonusCharge;
+    private int _bonusCharge;
+    public int bonusCharge
+    {
+        get { return _bonusCharge; }
+        set
+        {
+            _bonusCharge = value;
+            modifierText.text = $"{_chargeRate} + {bonusCharge}";
+        }
+    }
     public bool isLinked;
     #endregion
 
