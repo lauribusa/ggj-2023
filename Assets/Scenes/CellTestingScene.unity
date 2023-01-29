@@ -287,6 +287,18 @@ PrefabInstance:
       propertyPath: <Neighbors>k__BackingField.Array.data[0]
       value: 
       objectReference: {fileID: 1779988211}
+    - target: {fileID: 2733197672609546495, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2733197672609546495, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2733197672609546495, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 2774853158992895688, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.53756785
