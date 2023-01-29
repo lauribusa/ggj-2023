@@ -798,8 +798,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235629442}
-  m_LocalRotation: {x: -0.3012792, y: -0.6728634, z: 0.35137108, w: -0.5770824}
-  m_LocalPosition: {x: -74.42693, y: 108.455215, z: 12.680146}
+  m_LocalRotation: {x: -0.32833785, y: 0.47922757, z: -0.19927254, w: -0.7891931}
+  m_LocalPosition: {x: 95.3237, y: 110.208824, z: -49.515858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1266,6 +1266,9 @@ MonoBehaviour:
   factionChangedEvent:
     m_PersistentCalls:
       m_Calls: []
+  gameEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
   playerSelectedOrigin: {fileID: 0}
   playerSelectedDestination: {fileID: 0}
   existingNodes: []
@@ -1275,6 +1278,7 @@ MonoBehaviour:
   lowChargeThreshold1: 30
   highChargeThreshold2: 30
   passiveChargeInterval: 0
+  processingRate: 0
 --- !u!4 &2018416626
 Transform:
   m_ObjectHideFlags: 0
