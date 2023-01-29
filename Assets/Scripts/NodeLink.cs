@@ -68,10 +68,10 @@ public class NodeLink
             case Faction.Neutral:
                 break;
             case Faction.ImmuneSystem:
-                GameManager.Instance.factionChangedEvent?.Invoke(to, Faction.Neutral);
+                GameManager.Instance.factionChangedEvent?.Invoke(from, Faction.Neutral);
                 break;
             case Faction.Parasite:
-                GameManager.Instance.factionChangedEvent?.Invoke(to, Faction.Neutral);
+                GameManager.Instance.factionChangedEvent?.Invoke(from, Faction.Neutral);
                 break;
             default:
                 break;
