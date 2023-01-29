@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        StartNewGame();
+        //StartNewGame();
     }
 
     private void Update()
@@ -120,14 +120,12 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         hasGameEnded = false;
-        winScreen = GameObject.FindWithTag("WinScreen");
-        loseScreen = GameObject.FindWithTag("LoseScreen");
-        winScreen.gameObject.SetActive(false);
-        loseScreen.gameObject.SetActive(false);
         var AInodes = existingNodes.Where(x => x.CurrentFaction == Faction.ImmuneSystem).ToList();
         ImmuneSystem.Instance.SetStartNodes(AInodes);
         LookForStateScreens();
         AddAllListeners();
+        winScreen.gameObject.SetActive(false);
+        loseScreen.gameObject.SetActive(false);
     }
     public void LookForStateScreens()
     {
