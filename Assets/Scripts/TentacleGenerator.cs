@@ -37,8 +37,7 @@ public class TentacleGenerator : MonoBehaviour
         foreach (var neighbor in neighbors)
         {
             var tentacle = Instantiate(_tentacleMediumPrefab, Transform);
-            tentacle.Transform.LookAt(neighbor.transform.position);
-            tentacle.Deploy();
+            tentacle.Transform.LookAt(neighbor.cell.transform.position);
         }
     }
 
@@ -48,8 +47,7 @@ public class TentacleGenerator : MonoBehaviour
         foreach (var neighbor in neighbors)
         {
             var tentacle = Instantiate(_tentacleLongPrefab, Transform);
-            tentacle.Transform.LookAt(neighbor.transform.position);
-            tentacle.Deploy();
+            tentacle.Transform.LookAt(neighbor.cell.transform.position);
         }
     }
 
