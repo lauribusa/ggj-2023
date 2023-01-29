@@ -125,7 +125,7 @@ public class GameNodeUI : MonoBehaviour
         {
             bonus = 2;
         }
-        if(CurrentFaction == Faction.Neutral || isFactionMainNode)
+        if(CurrentFaction == Faction.Neutral || isFactionMainNode || isLinked)
         {
             bonus = 0;
         }
