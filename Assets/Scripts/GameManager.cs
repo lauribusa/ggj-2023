@@ -143,11 +143,14 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Node clicked: {node}");
         if (playerSelectedOrigin is null)
         {
+            if (node.CurrentFaction != Faction.Parasite) return;
+            Debug.Log($"Has been added to origin");
             playerSelectedOrigin = node;
             return;
         }
         if (!playerSelectedOrigin.neighbors.Contains(node))
         {
+            Debug.Log($"Is not a valid neighbor.");
             return;
         }
         linkCreatedEvent?.Invoke(playerSelectedOrigin, node);
@@ -181,6 +184,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
+            node.CurrentFaction = newFaction;
             return;
         }
         node.CurrentFaction = newFaction;
@@ -200,25 +204,16 @@ public class GameManager : MonoBehaviour
         playerSelectedDestination = null;
     }
 
-    public IEnumerator OnLinkExists(NodeLink link)
-    {
-        while (link.from.NodeValue >= 0 && link.to.NodeValue < globalMaxCharge)
-        {
-            link.Process();
-            yield return new WaitForSeconds(processingRate);
-        }
-        link.DestroyLink();
-    }
-
     public void OnLinkDestroyed(GameNodeUI from, GameNodeUI to)
     {
         Debug.Log($"Link destroyed: from: {from}, to: {to}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
+        Debug.Log($"Link created: from: {from}, to: {to}");
+        playerSelectedOrigin = null;
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
-        //activeLinks.Add(StartCoroutine(OnLinkExists(nodeLink)));
     }
 
     #endregion

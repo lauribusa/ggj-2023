@@ -162,7 +162,7 @@ public class GameNodeUI : MonoBehaviour
 
     public void OnClickNode()
     {
-        GameManager.Instance.NodeSelectedEvent?.Invoke(this);
+        GameManager.Instance.NodeClickedEvent?.Invoke(this);
     }
     #endregion
 
