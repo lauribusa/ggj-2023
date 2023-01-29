@@ -782,6 +782,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866147288388221373, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Luca mevis
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288388221373, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288388221373, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_margin.x
+      value: -162.26636
+      objectReference: {fileID: 0}
     - target: {fileID: 866147288413123401, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -808,11 +820,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_text
-      value: Game Design
+      value: Game/Level Design
       objectReference: {fileID: 0}
     - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_fontSize
-      value: 70
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_margin.z
+      value: 149.58667
       objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name
@@ -950,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 866147288388221373, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_margin.x
-      value: 117.653015
+      value: 159.29272
       objectReference: {fileID: 0}
     - target: {fileID: 866147288388221373, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_margin.z
@@ -987,6 +1003,10 @@ PrefabInstance:
     - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_fontSize
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_margin.z
+      value: -138.0506
       objectReference: {fileID: 0}
     - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_HorizontalAlignment
