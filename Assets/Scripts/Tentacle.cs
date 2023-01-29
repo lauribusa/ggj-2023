@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,7 +7,7 @@ public class Tentacle : MonoBehaviour
 {
     #region Events
 
-    public UnityEvent<bool> Deployed;
+    public UnityEvent<bool> TargetReached;
 
     #endregion
 
@@ -38,18 +39,19 @@ public class Tentacle : MonoBehaviour
     public void Deploy()
     {
         _animator.SetBool(CAN_DEPLOY, true);
-        Deployed?.Invoke(true);
+        _hasReach = true;
     }
 
     public void Retract()
     {
         _animator.SetBool(CAN_DEPLOY, false);
-        Deployed?.Invoke(false);
+        _hasReach = false;
     }
 
-    private void OnTargetReach()
+    private void OnTargetReached()
     {
-        Debug.Log("reached");
+        TargetReached?.Invoke(_hasReach);
+        GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
     }
 
     private void OnLinkCreated(GameNodeUI from, GameNodeUI to)
@@ -65,6 +67,7 @@ public class Tentacle : MonoBehaviour
     {
         if (from != GameNode && to != Target) return;
         if(to.CurrentFaction == Faction.Parasite) return;
+
         Retract();
     }
 
@@ -74,8 +77,10 @@ public class Tentacle : MonoBehaviour
     #region Private And Protected
 
     private const string CAN_DEPLOY = "CanDeploy";
+
     private Animator _animator;
     private Transform _transform;
+    private bool _hasReach;
 
     #endregion
 }
