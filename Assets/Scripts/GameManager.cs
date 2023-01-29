@@ -202,14 +202,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void CheckIfLinkIsFormed()
-    {
-        if (playerSelectedOrigin.neighbors.Contains(playerSelectedDestination))
-        {
-            linkCreatedEvent?.Invoke(playerSelectedOrigin, playerSelectedDestination);
-        }
-    }
-
     public void FlushSelectedNodes()
     {
         playerSelectedOrigin = null;
@@ -223,7 +215,10 @@ public class GameManager : MonoBehaviour
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
         Debug.Log($"Link created: from: {from}, to: {to}");
-        playerSelectedOrigin = null;
+        if(from.CurrentFaction == Faction.Parasite)
+        {
+            playerSelectedOrigin = null;
+        }
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
     }
