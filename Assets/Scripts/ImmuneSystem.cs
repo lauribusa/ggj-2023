@@ -70,7 +70,7 @@ public class ImmuneSystem : MonoBehaviour
             Debug.Log($"No valid friendly node found");
             return;
         }
-        Debug.Log($"Immune System is attempting a move on node {node} ({node.CurrentFaction} : {node.NodeValue}) from {friendlyNode} ({node.CurrentFaction} : ({node.NodeValue})");
+        Debug.Log($"Immune System is attempting a move on node {node} ({node.CurrentFaction} : {node.NodeValue}) from {friendlyNode} ({friendlyNode.CurrentFaction} : ({friendlyNode.NodeValue})");
         GameManager.Instance.linkCreatedEvent?.Invoke(friendlyNode, node);
     }
 

@@ -6,8 +6,9 @@ public class NodeLink
 {
     public GameNodeUI from;
     private int fromInitialValue;
+    public Faction fromInitialFaction;
     public GameNodeUI to;
-    private int toInitialValue;
+    public Faction toInitialFaction;
 
     //TODO
     // Faire en sorte que les nodes ne font pas juste dépenser leur points mais avoir un débit constant qui se dépense dans les liens.
@@ -21,15 +22,16 @@ public class NodeLink
         this.from = from;
         this.to = to;
         fromInitialValue = from.NodeValue;
-        toInitialValue = to.NodeValue;
+        fromInitialFaction = from.CurrentFaction;
+        toInitialFaction = to.CurrentFaction;
         if(from.CurrentFaction == to.CurrentFaction) 
         { 
-            from.chargeModifier--;
-            to.chargeModifier++;
+            DecreaseFromModifier();
+            IncreaseToModifier();
         } else
         {
-            from.chargeModifier--;
-            to.chargeModifier--;
+            DecreaseFromModifier();
+            DecreaseToModifier();
         }
         from.isLinked = true;
         to.isLinked = true;
@@ -39,6 +41,16 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
+        if (fromInitialFaction == toInitialFaction)
+        {
+            IncreaseFromModifier();
+            DecreaseToModifier();
+        }
+        else
+        {
+            IncreaseFromModifier();
+            IncreaseToModifier();
+        }
         GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
         GameManager.Instance.existingLinks.Remove(this);
     }
@@ -52,58 +64,45 @@ public class NodeLink
         DrainPower(from, to);
     }
 
+    private void IncreaseFromModifier()
+    {
+        from.chargeModifier++;
+    }
+
+    private void DecreaseFromModifier()
+    {
+        from.chargeModifier--;
+    }
+
+    private void IncreaseToModifier()
+    {
+        to.chargeModifier++;
+    }
+
+    private void DecreaseToModifier()
+    {
+        to.chargeModifier--;
+    }
+
     public void DrainPower(GameNodeUI from, GameNodeUI to)
     {
-        // trouver une façon de mettre les bonus sans que ca sois casse couille;
-
-        /* if (to.NodeValue < GameManager.Instance.lowChargeThreshold1)
-         {
-             from.chargeModifier = -2;
-             to.chargeModifier = -2;
-         } else
-         if (to.NodeValue < GameManager.Instance.highChargeThreshold2 && to.NodeValue > GameManager.Instance.lowChargeThreshold1)
-         {
-             from.chargeModifier = -2;
-             to.chargeModifier = -2;
-         } else
-         {
-             from.chargeModifier = -1;
-             to.chargeModifier = -1;
-         }*/
 
         if (from.NodeValue <= 0)
         {
             FromNodeIsDepleted();
-            from.chargeModifier++;
-            to.chargeModifier--;
         }
         
         if (to.NodeValue <= 0)
         {
             ToNodeIsDepleted();
-            from.chargeModifier++;
-            to.chargeModifier--;
         }
     }
 
 
     public void GivePower(GameNodeUI from, GameNodeUI to)
     {
-        // trouver une façon de mettre les bonus sans que ca sois casse couille;
-        /*if (to.NodeValue < GameManager.Instance.highChargeThreshold2)
-        {
-            from.chargeModifier += -2;
-            to.chargeModifier += 2;
-        }
-        else
-        {
-            from.chargeModifier = -1;
-            to.chargeModifier = 1;
-        }*/
         if (from.NodeValue < (fromInitialValue / 2) || to.NodeValue >= GameManager.Instance.globalMaxCharge)
         {
-            from.chargeModifier++;
-            to.chargeModifier++;
             DestroyLink();
             return;
         }
@@ -111,6 +110,7 @@ public class NodeLink
 
     public void FromNodeIsDepleted()
     {
+        DestroyLink();
         switch (from.CurrentFaction)
         {
             case Faction.Neutral:
@@ -124,11 +124,11 @@ public class NodeLink
             default:
                 break;
         }
-        DestroyLink();
     }
 
     public void ToNodeIsDepleted()
     {
+        DestroyLink();
         switch (to.CurrentFaction)
         {
             case Faction.Neutral:
@@ -143,7 +143,6 @@ public class NodeLink
             default:
                 break;
         }
-        DestroyLink();
     }
 }
 

@@ -60,7 +60,7 @@ public class GameNodeUI : MonoBehaviour
         set
         {
             _chargeModifier = value;
-            modifierText.text = $"{_chargeRate+chargeModifier}";
+            modifierText.text = $"{baseCharge+_chargeModifier}";
         }
     }
     public bool isLinked;

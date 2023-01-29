@@ -181,6 +181,7 @@ public class GameManager : MonoBehaviour
 
     public void OnNodeFactionChange(GameNodeUI node, Faction newFaction)
     {
+        Debug.Log($"Node has changed faction: {node.CurrentFaction} => {newFaction} ({node.NodeValue} & {node.baseCharge} + {node.chargeModifier})");
         if (node.CurrentFaction == Faction.ImmuneSystem)
         {
             ImmuneSystem.Instance.RemoveNodeFromCapturedList(node);
@@ -200,7 +201,7 @@ public class GameManager : MonoBehaviour
         {
             gameEndEvent?.Invoke(false);
         }
-
+        Debug.Log($"Node finished changing faction: {node.CurrentFaction} => {newFaction} ({node.NodeValue} & {node.baseCharge} + {node.chargeModifier})");
     }
 
     public void FlushSelectedNodes()
@@ -224,14 +225,11 @@ public class GameManager : MonoBehaviour
                     to.chargeRate++;
                     to.chargeRate++;
                 }*/
-        from.chargeModifier = 0;
-        to.chargeModifier = 0;
         Debug.Log($"Link destroyed: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
     }
     public void OnLinkCreated(GameNodeUI from, GameNodeUI to)
     {
-        Debug.Log($"Link created: from: {from}, to: {to}");
-
+        Debug.Log($"Link created: from: {from} ({from.CurrentFaction} : {from.baseCharge} + {from.chargeModifier}, to: {to} {to.CurrentFaction} {to.baseCharge} + {to.chargeModifier}");
         var nodeLink = new NodeLink(from, to);
         existingLinks.Add(nodeLink);
     }
