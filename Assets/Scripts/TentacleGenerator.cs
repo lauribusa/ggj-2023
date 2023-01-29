@@ -4,8 +4,8 @@ public class TentacleGenerator : MonoBehaviour
 {
     #region Exposed
 
-    [field:SerializeField]
-    public Transform[] Neighbors { get; private set; }
+    [SerializeField]
+    private GameNodeUI _gameNode;
 
     [SerializeField]
     private Tentacle _tentacleMediumPrefab;
@@ -20,15 +20,10 @@ public class TentacleGenerator : MonoBehaviour
 
     #region Unity API
 
-    private void Awake() => GenerateTentacles();
-
-    private void OnDrawGizmos()
+    private void Awake()
     {
-        for (int i = 0; i < Neighbors.Length; i++)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, Neighbors[i].position);
-        }
+        GenerateMediumTentacles();
+        GenerateLongTentacles();
     }
 
     #endregion
@@ -36,13 +31,25 @@ public class TentacleGenerator : MonoBehaviour
 
     #region Main
 
-    private void GenerateTentacles()
+    private void GenerateMediumTentacles()
     {
-        var neighbors = GetComponent<TentacleGenerator>().Neighbors;
+        var neighbors = _gameNode.closeNeighbors;
+        foreach (var neighbor in neighbors)
+        {
+            var tentacle = Instantiate(_tentacleMediumPrefab, Transform);
+            tentacle.Transform.LookAt(neighbor.transform.position);
+            tentacle.Deploy();
+        }
+    }
+
+    private void GenerateLongTentacles()
+    {
+        var neighbors = _gameNode.farNeighbors;
         foreach (var neighbor in neighbors)
         {
             var tentacle = Instantiate(_tentacleLongPrefab, Transform);
-            tentacle.Transform.LookAt(neighbor.position);
+            tentacle.Transform.LookAt(neighbor.transform.position);
+            tentacle.Deploy();
         }
     }
 
