@@ -34,20 +34,17 @@ public class Tentacle : MonoBehaviour
     public void Deploy()
     {
         _animator.SetBool(CAN_DEPLOY, true);
-        _hasReach = true;
         Deployed?.Invoke();
     }
 
     public void Retract()
     {
         _animator.SetBool(CAN_DEPLOY, false);
-        _hasReach = false;
         Retracted?.Invoke();
     }
 
     private void OnTargetReached()
     {
-        Debug.Log("target reached");
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
         Reached?.Invoke();
     }
@@ -77,7 +74,6 @@ public class Tentacle : MonoBehaviour
 
     private Animator _animator;
     private Transform _transform;
-    private bool _hasReach;
 
     #endregion
 }
