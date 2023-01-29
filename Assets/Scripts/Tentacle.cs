@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Animator))]
 public class Tentacle : MonoBehaviour
 {
     #region Exposed
+
+    public UnityEvent Deployed;
+    public UnityEvent Retracted;
+    public UnityEvent Reached;
 
     public GameNodeUI Target { get; set; }
     public GameNodeUI GameNode { get; set; }
@@ -30,18 +35,21 @@ public class Tentacle : MonoBehaviour
     {
         _animator.SetBool(CAN_DEPLOY, true);
         _hasReach = true;
+        Deployed?.Invoke();
     }
 
     public void Retract()
     {
         _animator.SetBool(CAN_DEPLOY, false);
         _hasReach = false;
+        Retracted?.Invoke();
     }
 
     private void OnTargetReached()
     {
         Debug.Log("target reached");
         GameManager.Instance.linkCreatedEvent?.Invoke(GameNode, Target);
+        Reached?.Invoke();
     }
 
     private void OnNodeClicked(GameNodeUI node)
