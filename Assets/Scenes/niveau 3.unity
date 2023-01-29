@@ -2434,7 +2434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8719130274786632302, guid: 914293e09b10c09418fc3356adb1bd47, type: 3}
       propertyPath: farNeighbors.Array.data[0]
