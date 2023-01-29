@@ -346,6 +346,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Programmer /Artist
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_fontSize
+      value: 69.95
+      objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name
       value: Contributor (1)
@@ -598,6 +606,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Programmer
+      objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name
       value: Contributor (2)
@@ -747,6 +759,14 @@ PrefabInstance:
     - target: {fileID: 866147288413123401, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Game Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_fontSize
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name
@@ -898,6 +918,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Game Design
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name
       value: Contributor (2)
@@ -1000,6 +1028,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 967805010}
     m_Modifications:
+    - target: {fileID: 2347924305288827048, guid: dc03592c04cc38545afe889359abde3b, type: 3}
+      propertyPath: m_text
+      value: Back
+      objectReference: {fileID: 0}
     - target: {fileID: 2347924305288827048, guid: dc03592c04cc38545afe889359abde3b, type: 3}
       propertyPath: m_fontSize
       value: 72
@@ -1402,6 +1434,10 @@ PrefabInstance:
     - target: {fileID: 866147288413123401, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 866147288413123402, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
+      propertyPath: m_text
+      value: Programmer
       objectReference: {fileID: 0}
     - target: {fileID: 866147288664213896, guid: e67e136b75b37fd4ca16f5af6b6dcfbd, type: 3}
       propertyPath: m_Name

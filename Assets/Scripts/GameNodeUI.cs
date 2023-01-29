@@ -17,7 +17,11 @@ public class GameNodeUI : MonoBehaviour
     public Faction CurrentFaction
     {
         get { return _currentFaction; }
-        set { _currentFaction = value; }
+        set 
+        {
+            ChangeFactionColor();
+            _currentFaction = value; 
+        }
     }
     [HideInInspector] public List<GameNodeUI> neighbors = new List<GameNodeUI>();
     
@@ -61,6 +65,7 @@ public class GameNodeUI : MonoBehaviour
         neighbors = closeNeighbors.Concat(farNeighbors).ToList();
         GameManager.Instance.AddToNodeList(this);
         NodeValueDisplayUpdate(nodeValue);
+        ChangeFactionColor();
     }
 
     private void OnDrawGizmosSelected()
@@ -89,6 +94,28 @@ public class GameNodeUI : MonoBehaviour
     public void DecreasePower() 
     { 
     
+    }
+
+    public void ChangeFactionColor()
+    {
+        switch (CurrentFaction)
+        {
+            case Faction.Neutral:
+                interactable.image.color = Color.black;
+                valueText.color = Color.black;
+                break;
+            case Faction.ImmuneSystem:
+                interactable.image.color = Color.blue;
+                valueText.color = Color.cyan;
+                break;
+            case Faction.Parasite:
+                interactable.image.color = Color.red;
+                valueText.color = Color.magenta;
+                break;
+            default:
+                break;
+        }
+       
     }
     public void PassiveCharge()
     {

@@ -18,6 +18,8 @@ public class NodeLink
     {
         from.isLinked = false;
         to.isLinked = false;
+        GameManager.Instance.existingLinks.Remove(this);
+        GameManager.Instance.linkDestroyedEvent?.Invoke(from, to);
     }
 
     public void DrainPower(GameNodeUI from, GameNodeUI to)
