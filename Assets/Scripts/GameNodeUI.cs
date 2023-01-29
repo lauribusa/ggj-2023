@@ -19,8 +19,8 @@ public class GameNodeUI : MonoBehaviour
         get { return _currentFaction; }
         set 
         {
+            _currentFaction = value;
             ChangeFactionColor();
-            _currentFaction = value; 
         }
     }
     [HideInInspector] public List<GameNodeUI> neighbors = new List<GameNodeUI>();
@@ -103,14 +103,26 @@ public class GameNodeUI : MonoBehaviour
             case Faction.Neutral:
                 interactable.image.color = Color.black;
                 valueText.color = Color.black;
+                if(cell != null)
+                {
+                    cell.SetNeutral();
+                }
                 break;
             case Faction.ImmuneSystem:
                 interactable.image.color = Color.blue;
                 valueText.color = Color.cyan;
+                if (cell != null)
+                {
+                    cell.SetImmune();
+                }
                 break;
             case Faction.Parasite:
                 interactable.image.color = Color.red;
                 valueText.color = Color.magenta;
+                if (cell != null)
+                {
+                    cell.SetCorrupt();
+                }
                 break;
             default:
                 break;
